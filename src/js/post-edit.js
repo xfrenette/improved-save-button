@@ -37,8 +37,9 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		var config = SAT.config,
 			$form = $('#post');
 
-		if( config && $form.length )
-			postEditForm = new SAT.PostEditForm( $form, config );
+		if( config && $form.length ) {
+			new SAT.PostEditForm( $form, config );
+		}
 	});
 
 	/**
@@ -179,11 +180,12 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			});
 
 			// If the config doesn't even specify a default action : fallback
-			if( ! defaultActionId )
+			if( ! defaultActionId ) {
 				return fallbackAction;
+			}
 
 			// If it is '_last', we get it from the cookie. If no cookie : fallback
-			if( SAT.ACTION_LAST == defaultActionId ) {
+			if( SAT.ACTION_LAST === defaultActionId ) {
 				var cookieVal = wpCookies.get( SAT.PostEditForm.LAST_USED_COOKIE_NAME );
 
 				if( ! cookieVal ) {
@@ -214,7 +216,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			var foundAction = null;
 
 			$.each( this.config.actions, function( i, action ) {
-				if( action.id == id ) {
+				if( action.id === id ) {
 					foundAction = action;
 					return false; // Break the $.each()
 				}
@@ -407,7 +409,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		setupMainButtonListeners : function() {
 			var self = this;
 
-			this.$mainButton.click(function( event ) {
+			this.$mainButton.click(function() {
 				if ( $(this).hasClass('disabled') ) {
 					return;
 				}

@@ -1,0 +1,18 @@
+{
+  "name": "roots",
+  "version": "1.0.0",
+  "author": "Xavier Frenette <xavier@xavierfrenette.com>",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "load-grunt-tasks": "~1.0.0",
+    "time-grunt": "~1.0.0",
+    "grunt-contrib-sass": "~0.8.1",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-flipcss": "~0.1.2"
+  }
+}
