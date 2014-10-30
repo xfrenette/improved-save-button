@@ -59,10 +59,12 @@ class LB_Save_And_Then_Settings {
 		if( $page_id != 'settings_page_' . self::MENU_SLUG ) {
 			return;
 		}
+
+		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_script(
 			'lb-save-and-then-settings-page',
-			LB_Save_And_Then_Utils::plugins_url( 'js/settings-page.js' ),
+			LB_Save_And_Then_Utils::plugins_url( "js/settings-page{$min}.js" ),
 			array('jquery'),
 			'1.0',
 			true

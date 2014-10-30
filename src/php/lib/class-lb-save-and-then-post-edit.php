@@ -48,10 +48,12 @@ class LB_Save_And_Then_Post_Edit {
 		if( $page_id != 'post.php' && $page_id != 'post-new.php' ) {
 			return;
 		}
+
+		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_script(
 			'lb-save-and-then-post-edit',
-			LB_Save_And_Then_Utils::plugins_url( 'js/post-edit.js' ),
+			LB_Save_And_Then_Utils::plugins_url( "js/post-edit{$min}.js" ),
 			array('jquery', 'utils'),
 			'1.0',
 			true
