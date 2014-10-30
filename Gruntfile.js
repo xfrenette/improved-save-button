@@ -103,18 +103,25 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
+			php: {
+				files: [
+					'<%= dir.src.php %>/*',
+					'<%= dir.src.php %>/**/*'
+				],
+				tasks: ['copy:php']
+			},
 			sass: {
 				files: [
 					'<%= dir.src.sass %>/*.scss',
 					'<%= dir.src.sass %>/**/*.scss'
 				],
-				tasks: ['compass:dev']
+				tasks: ['sass:dev']
 			},
 			js: {
 				files: [
 					jsFileList
 				],
-				tasks: ['jshint', 'concat']
+				tasks: ['jshint', 'copy:js']
 			}
 		}
 	});
