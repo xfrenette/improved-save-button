@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Save then create new, show list, or more...
+Plugin Name: Save and create new or show list, etc.
 Description: Adds more save option
 Author: Label Blanc
 Version: 1.0
@@ -82,6 +82,10 @@ class LB_Save_And_Then {
 		LB_Save_And_Then_Post_Edit::setup();
 		LB_Save_And_Then_Redirect::setup();
 		LB_Save_And_Then_Messages::setup();
+	}
+
+	static function get_localized_name() {
+		return __( 'Save and create new or show list, etc.', 'lb-save-and-then' );
 	}
 
 	/**

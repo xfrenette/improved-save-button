@@ -127,7 +127,7 @@ class LB_Save_And_Then_Settings {
 	 */
 	static function create_administration_menu() {
 		add_options_page(
-			__('Save then create new, show list, or more... Settings', 'lb-save-and-then'),
+			sprintf( __('%s Settings', 'lb-save-and-then'), LB_Save_And_Then::get_localized_name() ),
 			__('Save and then...', 'lb-save-and-then'),
 			'manage_options',
 			self::MENU_SLUG,
@@ -144,7 +144,7 @@ class LB_Save_And_Then_Settings {
 		}
 		?>
 		<div class="wrap">
-		<h2><?php _e('<em>Save then create new, show list, or more...</em> Settings', 'lb-save-and-then'); ?></h2>
+		<h2><?php printf( __('<em>%s</em> Settings', 'lb-save-and-then'), LB_Save_And_Then::get_localized_name() ); ?></h2>
 		<form method="post" action="options.php" data-lb-sat-settings="form">
 			<?php settings_fields( self::OPTION_GROUP ); ?>
 			<?php do_settings_sections( self::MENU_SLUG ); ?>
