@@ -301,14 +301,12 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		createMainButton : function() {
 			var $mainButton = $('<input type="button" />');
 
-			$mainButton
-				.attr('class', this.postEditForm.$originalPublishButton.attr('class') )
-				.addClass('lb-sat-main-button');
+			$mainButton.attr('class', 'button button-large lb-sat-main-button' );
 
-			if( ! this.config.setAsDefault ) {
-				$mainButton
-					.removeClass('button-primary')
-					.removeAttr('accesskey');
+			if( this.config.setAsDefault ) {
+				$mainButton.addClass('button-primary');
+			} else {
+				$mainButton.removeAttr('accesskey');
 			}
 
 			return $mainButton;
