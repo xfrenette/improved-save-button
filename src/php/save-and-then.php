@@ -5,6 +5,8 @@ Description: Adds more save option
 Author: Label Blanc
 Version: 1.0
 Author URI: http://www.labelblanc.ca
+Domain Path: /languages/
+Text Domain: lb-save-and-then
 */
 
 /**
@@ -82,10 +84,18 @@ class LB_Save_And_Then {
 		LB_Save_And_Then_Post_Edit::setup();
 		LB_Save_And_Then_Redirect::setup();
 		LB_Save_And_Then_Messages::setup();
+
+		add_action( 'plugins_loaded', array( get_called_class(), 'load_languages' ) );
 	}
 
 	static function get_localized_name() {
 		return __( 'Save and create new or show list, etc.', 'lb-save-and-then' );
+	}
+
+	static function load_languages() {
+		$path = dirname( LB_Save_And_Then_Utils::plugin_main_file_basename() );
+		$path .= '/languages/';
+		load_plugin_textdomain( 'lb-save-and-then', false, $path );
 	}
 
 	/**

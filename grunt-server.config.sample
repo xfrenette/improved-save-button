@@ -8,11 +8,12 @@
 		},
 
 		"dist" : {
-			"dist"   : "dist",
-			"plugin" : "<%= dir.dist.dist %>/save-and-then",
-			"js"     : "<%= dir.dist.plugin %>/js",
-			"sass"   : "<%= dir.dist.plugin %>/scss",
-			"css"    : "<%= dir.dist.plugin %>/css"
+			"dist"         : "dist",
+			"plugin"       : "<%= dir.dist.dist %>/save-and-then",
+			"js"           : "<%= dir.dist.plugin %>/js",
+			"sass"         : "<%= dir.dist.plugin %>/scss",
+			"css"          : "<%= dir.dist.plugin %>/css",
+			"translations" : "<%= dir.dist.plugin %>/languages"
 		}
 	}
 }

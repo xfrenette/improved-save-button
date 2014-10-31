@@ -41,8 +41,8 @@ class LB_Save_And_Then_Settings {
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
 	static function setup() {
-		add_action( 'admin_init', array( get_called_class(), 'setup_settings' )  );
-		add_action( 'admin_init', array( get_called_class(), 'setup_settings_fields' )  );
+		add_action( 'admin_init', array( get_called_class(), 'setup_settings' ) );
+		add_action( 'admin_init', array( get_called_class(), 'setup_settings_fields' ) );
 		add_action( 'admin_enqueue_scripts', array( get_called_class(), 'add_admin_scripts' ) );
 		add_action( 'admin_menu', array( get_called_class(), 'create_administration_menu' ) );
 		$plugin = LB_Save_And_Then_Utils::plugin_main_file_basename();

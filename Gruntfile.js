@@ -102,6 +102,18 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		makepot : {
+			main: {
+				options: {
+					cwd: '<%= dir.dist.plugin %>',
+					mainFile: 'save-and-then.php',
+					type: 'wp-plugin',
+					potHeaders: {
+						poedit: true
+					}
+				}
+			}
+		},
 		watch: {
 			php: {
 				files: [
