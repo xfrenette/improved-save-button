@@ -1,2 +1,3 @@
 /grunt-server.config
 /node_modules
+*.mo

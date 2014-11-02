@@ -85,17 +85,28 @@ class LB_Save_And_Then {
 		LB_Save_And_Then_Redirect::setup();
 		LB_Save_And_Then_Messages::setup();
 
-		add_action( 'plugins_loaded', array( get_called_class(), 'load_languages' ) );
+		add_action( 'admin_init', array( get_called_class(), 'load_languages' ) );
 	}
 
+	/**
+	 * Returns the localized name of the plugin
+	 * @return string
+	 */
 	static function get_localized_name() {
-		return __( 'Save and create new or show list, etc.', 'lb-save-and-then' );
+		$plugin_data = get_plugin_data( __FILE__, false, true );
+		return $plugin_data['Name'];
 	}
 
+	/**
+	 * Loads the language file for the admin. Must be called in the
+	 * 'admin_init' hook, since it uses get_plugin_data() and this
+	 * function is loaded once all admin files are included.
+	 */
 	static function load_languages() {
+		$plugin_data = get_plugin_data( __FILE__, false, true );
 		$path = dirname( LB_Save_And_Then_Utils::plugin_main_file_basename() );
-		$path .= '/languages/';
-		load_plugin_textdomain( 'lb-save-and-then', false, $path );
+		$path .= $plugin_data['DomainPath'];
+		load_plugin_textdomain( $plugin_data['TextDomain'], false, $path );
 	}
 
 	/**
