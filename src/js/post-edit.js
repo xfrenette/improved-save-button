@@ -59,6 +59,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		this.$actionInput = this.createActionInput();
 		this.$originalPublishButton = this.getOriginalPublishButton();
 		this.newPublishButtonSet = new SAT.PublishButtonSet( this );
+		this.$spinner = this.$form.find('#publishing-action .spinner');
 
 		/*
 		 * We setup different elements.
@@ -70,6 +71,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		this.setupWordpressListeners();
 		this.newPublishButtonSet.hideMenu();
 		this.insertNewPublishButtonSet();
+		this.updateSpinner();
 	};
 
 	/**
@@ -89,17 +91,35 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		},
 
 		/**
+		 * Adds classes to the spinner showing the saving and
+		 * also position it near the original button.
+		 */
+		updateSpinner : function() {
+			this.$spinner.addClass('lb-sat-spinner').hide();
+
+			// We always position the spinner just before the original
+			// publish button. If we click on the new button, we will
+			// move the spinner
+			this.$originalPublishButton.before( this.$spinner );
+		},
+
+		/**
 		 * Inserts the new publish button elements after or before
 		 * the original publish button, depending on weither the
 		 * new button should be displayed as the default one or not.
 		 */
 		insertNewPublishButtonSet : function() {
-			var $container = this.newPublishButtonSet.$container;
+			var $container = this.newPublishButtonSet.$container,
+				$separator = $('<div class="lb-sat-separator"></div>');
 
 			if( this.config.setAsDefault ) {
-				this.$originalPublishButton.after( $container );
+				this.$originalPublishButton
+					.after( $container )
+					.after( $separator );
 			} else {
-				this.$originalPublishButton.before( $container );
+				this.$originalPublishButton
+					.before( $container )
+					.before( $separator );
 			}
 		},
 
@@ -411,6 +431,9 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 				if ( $(this).hasClass('disabled') ) {
 					return;
 				}
+				// We move the spinner just before the new button container
+				self.$container.before( self.postEditForm.$spinner );
+
 				self.postEditForm.setAction( self.action );
 				self.postEditForm.$originalPublishButton.trigger('click');
 			});

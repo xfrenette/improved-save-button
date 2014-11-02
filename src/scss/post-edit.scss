@@ -28,20 +28,29 @@
  */
 
 /**
+ * Separator between the original and the new publish button
+ */
+.lb-sat-separator {
+	height: 10px;
+}
+
+/**
+ * Class added to the spinner that redefines some styles
+ */
+.lb-sat-spinner {
+	#publishing-action & {
+		display: inline-block;
+		float: none;
+	}
+}
+
+/**
  * Container of the new button set
  */
 .lb-sat-container {
 	position: relative;
 	white-space: nowrap;
-	display: block;
-	margin-bottom: 10px;
-
-	// When the new button set must be displayed as the default button.
-	// Other elements below also have styles with this class.
-	&.lb-sat-set-as-default {
-		margin-bottom: 0;
-		margin-top: 10px;
-	}
+	display: inline-block;
 
 	// When the dropdown menu has to be shown.
 	// Other elements below also have styles with this class.
