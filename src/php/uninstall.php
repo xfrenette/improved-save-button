@@ -26,4 +26,18 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 
 require_once('lib/class-lb-save-and-then-settings.php');
 
-delete_option( LB_Save_And_Then_Settings::MAIN_SETTING_NAME );
+if( ! is_multisite() ) {
+	delete_option( LB_Save_And_Then_Settings::MAIN_SETTING_NAME );
+} else {
+	global $wpdb;
+	
+	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+	$original_blog_id = get_current_blog_id();
+
+	foreach ( $blog_ids as $blog_id ) {
+		switch_to_blog( $blog_id );
+		delete_option( LB_Save_And_Then_Settings::MAIN_SETTING_NAME );    
+	}
+
+	switch_to_blog( $original_blog_id );
+}
