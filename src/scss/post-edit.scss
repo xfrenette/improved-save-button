@@ -27,11 +27,17 @@
  * file can be generated with one of the Grunt tasks.
  */
 
+$lb-sat-media-query-sm: "screen and (max-width: 782px)";
+
 /**
  * Separator between the original and the new publish button
  */
 .lb-sat-separator {
 	height: 10px;
+
+	@media #{$lb-sat-media-query-sm} {
+		height: 0;
+	}
 }
 
 /**
@@ -99,6 +105,15 @@
 
 		&.button-large {
 			padding: 0 6px 0 4px;
+
+			@media #{$lb-sat-media-query-sm} {
+				padding-top: 6px;
+				padding-bottom: 6px;
+			}
+		}
+
+		@media #{$lb-sat-media-query-sm} {
+			font-size: 19px;
 		}
 	}
 
