@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Save and create new or show list, etc.
+Plugin Name: @@plugin.name
 Description: Adds more save option
 Author: Label Blanc
 Version: 1.0
@@ -10,9 +10,9 @@ Text Domain: lb-save-and-then
 */
 
 /**
- * Copyright 2014 Label Blanc (http://www.labelblanc.ca/)
+ * Copyright @@copyright.year Label Blanc (http://www.labelblanc.ca/)
  *
- * This file is part of the "Save then create new, show list, or more..."
+ * This file is part of the "@@plugin.name"
  * Wordpress plugin.
  *
  * The "Save then create new, show list, or more..." Wordpress plugin

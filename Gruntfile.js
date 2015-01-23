@@ -88,6 +88,20 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		replace : {
+	      options : {
+	        patterns : [
+	          {
+	            json: grunt.file.readJSON('grunt-replace-dict.json')
+	          }
+	        ]
+	      },
+	      php : {
+		      files : [{
+		        expand: true, cwd: '<%= dir.src.php %>/', src:['**'], dest: '<%= dir.dist.plugin %>/'
+		      }]
+		  }
+	    },
 		flipcss: {
 			options: {
 				warnings: true
@@ -154,7 +168,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		'jshint',
 		'clean:dist',
-		'copy:php',
+		'replace:php',
 		'copy:js',
 		'uglify',
 		'copy:sass',

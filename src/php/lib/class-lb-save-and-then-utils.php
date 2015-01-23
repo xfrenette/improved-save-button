@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Copyright 2014 Label Blanc (http://www.labelblanc.ca/)
+ * Copyright @@copyright.year Label Blanc (http://www.labelblanc.ca/)
  *
- * This file is part of the "Save then create new, show list, or more..."
+ * This file is part of the "@@plugin.name"
  * Wordpress plugin.
  *
  * The "Save then create new, show list, or more..." Wordpress plugin
