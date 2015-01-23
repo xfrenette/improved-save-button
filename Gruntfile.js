@@ -35,6 +35,16 @@ module.exports = function(grunt) {
 				files: [
 					{ expand: true, cwd: '<%= dir.src.sass %>/', src: ['**'], dest: '<%= dir.dist.sass %>/' }
 				]
+			},
+			po: {
+				files: [
+					{ expand: true, cwd: '<%= dir.src.po %>/', src:['*.po'], dest: '<%= dir.dist.languages %>/' }
+				]
+			},
+			distAssets: {
+				files: [
+					{ expand: true, cwd: '<%= dir.src.distAssets %>/', src:['**'], dest: '<%= dir.dist.plugin %>/' }
+				]
 			}
 		},
 		sass: {
@@ -88,20 +98,18 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-		replace : {
-	      options : {
-	        patterns : [
-	          {
-	            json: grunt.file.readJSON('grunt-replace-dict.json')
-	          }
-	        ]
-	      },
-	      php : {
-		      files : [{
-		        expand: true, cwd: '<%= dir.src.php %>/', src:['**'], dest: '<%= dir.dist.plugin %>/'
-		      }]
-		  }
-	    },
+		replace: {
+			options: {
+				patterns: [{
+					json: grunt.file.readJSON('grunt-replace-dict.json')
+				}]
+			},
+			php: {
+				files: [{
+					expand: true, cwd: '<%= dir.src.php %>/', src:['**'], dest: '<%= dir.dist.plugin %>/'
+				}]
+			}
+		},
 		flipcss: {
 			options: {
 				warnings: true
@@ -116,7 +124,7 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-		makepot : {
+		makepot: {
 			main: {
 				options: {
 					cwd: '<%= dir.dist.plugin %>',
@@ -126,6 +134,13 @@ module.exports = function(grunt) {
 						poedit: true
 					}
 				}
+			}
+		},
+		po2mo: {
+			languages: {
+				files: [
+					{ expand: true, cwd: '<%= dir.src.po %>/', src: '*.po', dest: '<%= dir.dist.languages %>' }
+				]
 			}
 		},
 		watch: {
@@ -168,11 +183,14 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		'jshint',
 		'clean:dist',
-		'replace:php',
+		'replace',
 		'copy:js',
 		'uglify',
 		'copy:sass',
+		'copy:po',
+		'copy:distAssets',
 		'sass:dist',
-		'flipcss'
+		'flipcss',
+		'makepot'
 	]);
 };

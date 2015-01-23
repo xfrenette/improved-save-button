@@ -1,10 +1,11 @@
 {
 	"dir" : {
 		"src" : {
-			"php"     : "src/php",
-			"js"      : "src/js",
-			"sass"    : "src/scss",
-			"license" : "COPYING.txt"
+			"php"         : "src/php",
+			"js"          : "src/js",
+			"sass"        : "src/scss",
+			"po"          : "src/po",
+			"distAssets"  : "src/po"
 		},
 
 		"dist" : {
@@ -13,7 +14,7 @@
 			"js"           : "<%= dir.dist.plugin %>/js",
 			"sass"         : "<%= dir.dist.plugin %>/scss",
 			"css"          : "<%= dir.dist.plugin %>/css",
-			"translations" : "<%= dir.dist.plugin %>/languages"
+			"languages"    : "<%= dir.dist.plugin %>/languages"
 		}
 	}
 }
