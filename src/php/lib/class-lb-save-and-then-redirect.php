@@ -171,14 +171,18 @@ class LB_Save_And_Then_Redirect {
 	 * @return boolean
 	 */
 	protected static function url_is_posts_list( $url, $post_type = 'post' ) {
-		wp_parse_str( $url, $url_params );
+		$url_parts = parse_url( $url );
+		$url_params = array();
+		if( array_key_exists( 'query', $url_parts ) ) {
+			parse_str( $url_parts['query'], $url_params );
+		}
 
 		// If no post type is set in the URL, defaults to 'post'
 		$url_post_type = isset( $url_params['post_type'] ) ? $url_params['post_type'] : 'post';
 
 		// True if the url is edit.php and the post type is the same
 		return (
-			strpos( $url, 'edit.php' ) !== false
+			strpos( $url_parts['path'], 'edit.php' ) !== false
 			&&
 			$url_post_type == $post_type
 		);
