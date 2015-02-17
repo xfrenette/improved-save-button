@@ -130,7 +130,7 @@ class LB_Save_And_Then_Settings {
 	static function create_administration_menu() {
 		add_options_page(
 			sprintf( __('%s Settings', 'lb-save-and-then'), LB_Save_And_Then::get_localized_name() ),
-			__('Save and then...', 'lb-save-and-then'),
+			__('@@plugin.name', 'lb-save-and-then'),
 			'manage_options',
 			self::MENU_SLUG,
 			array( get_called_class(), 'create_options_page' )
@@ -178,7 +178,7 @@ class LB_Save_And_Then_Settings {
 
 			case 'set-as-default':
 				$html .= '<fieldset><label><input type="checkbox" name="' . $option_field_name. '" value="1"' . checked( 1, $option_value, false ) . '/>';
-				$html .= '<span>' . __('Display the new publish button as the default one', 'lb-save-and-then') . '</span></label></fieldset>';
+				$html .= '<span>' . __('Display the new save button as the default one', 'lb-save-and-then') . '</span></label></fieldset>';
 				break;
 
 			case 'actions':
