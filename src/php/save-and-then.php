@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: @@plugin.name
-Description: Adds more save option
+Description: Adds a "Save" button to the post edit screen that saves the post and immediately redirect to one of the common page: the post listing, the new post form or the previous or next post edit page.
 Author: Label Blanc
 Version: 1.0
 Author URI: http://www.labelblanc.ca

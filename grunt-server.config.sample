@@ -5,12 +5,13 @@
 			"js"          : "src/js",
 			"sass"        : "src/scss",
 			"po"          : "src/po",
-			"distAssets"  : "src/po"
+			"distAssets"  : "src/dist-assets"
 		},
 
 		"dist" : {
 			"dist"         : "dist",
-			"plugin"       : "<%= dir.dist.dist %>/save-and-then",
+			"assets"       : "<%= dir.dist.dist %>/assets",
+			"plugin"       : "<%= dir.dist.dist %>/improved-save-button",
 			"js"           : "<%= dir.dist.plugin %>/js",
 			"sass"         : "<%= dir.dist.plugin %>/scss",
 			"css"          : "<%= dir.dist.plugin %>/css",

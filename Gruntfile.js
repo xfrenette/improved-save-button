@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 			},
 			distAssets: {
 				files: [
-					{ expand: true, cwd: '<%= dir.src.distAssets %>/', src:['**'], dest: '<%= dir.dist.plugin %>/' }
+					{ expand: true, cwd: '<%= dir.src.distAssets %>/assets', src:['**'], dest: '<%= dir.dist.assets %>' }
 				]
 			}
 		},
@@ -112,6 +112,11 @@ module.exports = function(grunt) {
 			js: {
 				files: [{
 					expand: true, cwd: '<%= dir.src.js %>/', src:['**'], dest: '<%= dir.dist.js %>/'
+				}]
+			},
+			distAssets: {
+				files: [{
+					expand: true, cwd: '<%= dir.src.distAssets %>/plugin', src:['**'], dest: '<%= dir.dist.plugin %>/'
 				}]
 			}
 		},
@@ -193,6 +198,7 @@ module.exports = function(grunt) {
 		'uglify',
 		'copy:sass',
 		'copy:po',
+		'replace:distAssets',
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
