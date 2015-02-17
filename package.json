@@ -1,7 +1,7 @@
 {
-  "name": "roots",
+  "name": "labelblanc-wp-improved-save-button",
   "version": "1.0.0",
-  "author": "Xavier Frenette <xavier@xavierfrenette.com>",
+  "author": "Label Blanc <xavier@xavierfrenette.com>",
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.5",
