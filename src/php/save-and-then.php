@@ -127,23 +127,23 @@ class LB_Save_And_Then {
 	static function get_actions() {
 		return array(
 			'new'      => array(
-				'name' => __('Save and new', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and new', 'lb-save-and-then'),
+				'name' => __('Save and New', 'lb-save-and-then'),
+				'button_label_pattern' =>__('%s and New', 'lb-save-and-then'),
 				'description' => __('Shows the <strong>new post</strong> form after save.', 'lb-save-and-then'),
 			),
 			'list'     => array(
-				'name' => __('Save and list', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and list', 'lb-save-and-then'),
+				'name' => __('Save and List', 'lb-save-and-then'),
+				'button_label_pattern' =>__('%s and List', 'lb-save-and-then'),
 				'description' => __('Shows the <strong>posts list</strong> after save.', 'lb-save-and-then'),
 			),
 			'next'     => array(
-				'name' => __('Save and next', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and next', 'lb-save-and-then'),
+				'name' => __('Save and Next', 'lb-save-and-then'),
+				'button_label_pattern' =>__('%s and Next', 'lb-save-and-then'),
 				'description' => __('Shows the <strong>next post</strong> edit form after save.', 'lb-save-and-then'),
 			),
 			'previous' => array(
-				'name' => __('Save and previous', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and previous', 'lb-save-and-then'),
+				'name' => __('Save and Previous', 'lb-save-and-then'),
+				'button_label_pattern' =>__('%s and Previous', 'lb-save-and-then'),
 				'description' => __('Shows the <strong>previous post</strong> edit form after save.', 'lb-save-and-then'),
 			),
 		);
