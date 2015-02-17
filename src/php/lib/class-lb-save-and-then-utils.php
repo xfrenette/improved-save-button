@@ -63,8 +63,9 @@ class LB_Save_And_Then_Utils {
 	}
 
 	/**
-	 * Takes a WP_Post instance and returns its next or previous
-	 * (depending on $dir value) post, based on publication date.
+	 * Takes a WP_Post instance and returns the next or previous
+	 * (depending on $dir value) post the current user can edit,
+	 * ordered by publication date.
 	 *
 	 * Wordpress already has an get_adjacent_post function, but it checks
 	 * only posts with 'published' state. We needed to check any post that
@@ -82,11 +83,21 @@ class LB_Save_And_Then_Utils {
 		$op = $dir == 'next' ? '>' : '<';
 		$order = $dir == 'next' ? 'ASC' : 'DESC';
 		$exclude_states = get_post_stati( array( 'show_in_admin_all_list' => false ) );
+		$additionnal_where = '';
 
+		// If the current user cannot edit others posts, we add a WHERE clause
+		// where only the user's post are returned
+		$post_type_object = get_post_type_object( get_post_type( $post ) );
+
+		if ( ! current_user_can( $post_type_object->cap->edit_others_posts ) ) {
+			$additionnal_where .= ' AND post_author = \'' . get_current_user_id() . '\'';
+		}
+		
 		$query = $wpdb->prepare("
 				SELECT p.ID FROM $wpdb->posts AS p
 				WHERE p.post_date $op %s AND p.post_type = %s
 				AND (p.post_status NOT IN ('" . implode( "','", $exclude_states ) . "'))
+				$additionnal_where
 				ORDER BY p.post_date $order LIMIT 1
 			",
 			 $post->post_date, $post->post_type
