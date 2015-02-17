@@ -49,13 +49,37 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 	 * @param {object} config The configuration object
 	 */
 	SAT.PostEditForm = function( $form, config ) {
+		if( ! config.actions || config.actions.length === 0 ) {
+			return;
+		}
+
+		this.$form = $form;
+		this.config = config;
+
+		/**
+		 * The default action to show on the button. May be overwritten
+		 * below in the special case where only one action is available
+		 * and it is not enabled.
+		 * @type {object}
+		 */
+		var defaultAction = this.getDefaultAction();
+
+		/*
+		 * Special case : if there is only one action, and it is not
+		 * enabled (ex : only the "Save and previous", but there is no
+		 * previous post), we save in the configuration that the
+		 * button set is "dummy".
+		 */
+		if( config.actions.length === 1 && ! config.actions[0].enabled ) {
+			this.config.newButtonSetIsDummy = true;
+			defaultAction = config.actions[0];
+		}
+
 		/*
 		 * We start by creating all the elements and classes
 		 * we need and save them in variables. The following
 		 * functions will use those variables.
 		 */
-		this.$form = $form;
-		this.config = config;
 		this.$actionInput = this.createActionInput();
 		this.$originalPublishButton = this.getOriginalPublishButton();
 		this.newPublishButtonSet = new SAT.PublishButtonSet( this );
@@ -66,12 +90,16 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		 */
 		this.setupForm();
 		this.setupOriginalPublishButton();
-		this.newPublishButtonSet.setAction( this.getDefaultAction() );
+		this.newPublishButtonSet.setAction( defaultAction );
 		this.setupFormListeners();
 		this.setupWordpressListeners();
 		this.newPublishButtonSet.hideMenu();
 		this.insertNewPublishButtonSet();
 		this.updateSpinner();
+
+		if( this.config.newButtonSetIsDummy ) {
+			this.newPublishButtonSet.disable( true );
+		}
 	};
 
 	/**
@@ -157,7 +185,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		 * or not.
 		 */
 		setupOriginalPublishButton : function() {
-			if( this.config.setAsDefault ) {
+			if( this.config.setAsDefault && ! this.config.newButtonSetIsDummy ) {
 				this.$originalPublishButton
 					.removeClass('button-primary')
 					.removeAttr('accesskey');
@@ -259,7 +287,9 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 				self.newPublishButtonSet.disable( true );
 			}).on( 'autosave-enable-buttons.edit-post', function() {
 				if ( ! wp.heartbeat || ! wp.heartbeat.hasConnectionError() ) {
-					self.newPublishButtonSet.disable( false );
+					if( ! self.config.newButtonSetIsDummy ) {
+						self.newPublishButtonSet.disable( false );
+					}
 				}
 			});
 
@@ -323,7 +353,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 
 			$mainButton.attr('class', 'button button-large lb-sat-main-button' );
 
-			if( this.config.setAsDefault ) {
+			if( this.config.setAsDefault && ! this.config.newButtonSetIsDummy ) {
 				$mainButton.addClass('button-primary');
 			} else {
 				$mainButton.removeAttr('accesskey');
@@ -428,7 +458,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			var self = this;
 
 			this.$mainButton.click(function() {
-				if ( $(this).hasClass('disabled') ) {
+				if ( $(this).hasClass('disabled') || self.config.newButtonSetIsDummy ) {
 					return;
 				}
 				// We move the spinner just before the new button container
@@ -463,7 +493,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			var self = this;
 
 			this.$dropdownMenu.on('click', 'li', function() {
-				if( $(this).hasClass('disabled') ) {
+				if( $(this).hasClass('disabled') || self.config.newButtonSetIsDummy ) {
 					return;
 				}
 				self.setAction( $(this).data('lbSatActionData') );
@@ -542,6 +572,9 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 
 			if( disabled ) {
 				this.hideMenu();
+				this.$mainButton.prop( 'disabled', true );
+			} else {
+				this.$mainButton.prop( 'disabled', false );
 			}
 		}
 	};
