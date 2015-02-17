@@ -91,7 +91,7 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: '<%= dir.src.js %>',
+					cwd: '<%= dir.dist.js %>',
 					src: '**/*.js',
 					dest: '<%= dir.dist.js %>',
 					ext: '.min.js'
@@ -107,6 +107,11 @@ module.exports = function(grunt) {
 			php: {
 				files: [{
 					expand: true, cwd: '<%= dir.src.php %>/', src:['**'], dest: '<%= dir.dist.plugin %>/'
+				}]
+			},
+			js: {
+				files: [{
+					expand: true, cwd: '<%= dir.src.js %>/', src:['**'], dest: '<%= dir.dist.js %>/'
 				}]
 			}
 		},
@@ -183,8 +188,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		'jshint',
 		'clean:dist',
-		'replace',
-		'copy:js',
+		'replace:php',
+		'replace:js',
 		'uglify',
 		'copy:sass',
 		'copy:po',
