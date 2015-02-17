@@ -6,7 +6,7 @@
  * This file is part of the "@@plugin.name"
  * Wordpress plugin.
  *
- * The "Save then create new, show list, or more..." Wordpress plugin
+ * The "@@plugin.name" Wordpress plugin
  * is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -206,7 +206,7 @@ class LB_Save_And_Then_Settings {
 				$option_last_action = array(
 					LB_Save_And_Then::ACTION_LAST => array(
 						'name' => __('<em>Last used</em>', 'lb-save-and-then'),
-						'description' => __('The action that was last used', 'lb-save-and-then')
+						'description' => __('The last action that was used', 'lb-save-and-then')
 					)
 				);
 
