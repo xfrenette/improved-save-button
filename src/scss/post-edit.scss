@@ -72,6 +72,8 @@ $lb-sat-media-query-sm: "screen and (max-width: 782px)";
  * The main button
  */
 .lb-sat-main-button {
+	vertical-align: top;
+	
 	.wp-core-ui .lb-sat-with-dropdown &.button {
 		-webkit-border-bottom-right-radius: 0;
 		        border-bottom-right-radius: 0;
