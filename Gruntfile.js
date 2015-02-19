@@ -138,7 +138,7 @@ module.exports = function(grunt) {
 			main: {
 				options: {
 					cwd: '<%= dir.dist.plugin %>',
-					mainFile: 'save-and-then.php',
+					mainFile: 'improved-save-button.php',
 					type: 'wp-plugin',
 					potHeaders: {
 						poedit: true

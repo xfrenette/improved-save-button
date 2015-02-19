@@ -66,7 +66,9 @@ class LB_Save_And_Then_Post_Edit {
 			'1.0'
 		);
 
-		wp_style_add_data( 'lb-save-and-then-post-edit', 'rtl', 'replace' );
+		if( function_exists('wp_style_add_data') ) {
+			wp_style_add_data( 'lb-save-and-then-post-edit', 'rtl', 'replace' );
+		}
 	}
 
 
