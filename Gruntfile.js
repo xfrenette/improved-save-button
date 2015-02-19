@@ -146,10 +146,10 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		po2mo: {
+		potomo: {
 			languages: {
 				files: [
-					{ expand: true, cwd: '<%= dir.src.po %>/', src: '*.po', dest: '<%= dir.dist.languages %>' }
+					{ expand: true, cwd: '<%= dir.src.po %>/', src: ['*.po'], dest: '<%= dir.dist.languages %>', ext: '.mo' }
 				]
 			}
 		},
@@ -198,6 +198,7 @@ module.exports = function(grunt) {
 		'uglify',
 		'copy:sass',
 		'copy:po',
+		'potomo',
 		'replace:distAssets',
 		'copy:distAssets',
 		'sass:dist',
