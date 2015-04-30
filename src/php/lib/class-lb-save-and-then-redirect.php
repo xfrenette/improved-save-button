@@ -155,12 +155,12 @@ class LB_Save_And_Then_Redirect {
 				break;
 		}
 
-		if( $new_url ) {
+		if( isset( $new_url ) && ! empty( $new_url ) ) {
 			$new_url = add_query_arg( $url_get_params, $new_url );
 			$location = $new_url;
 		}
 
-		return $location;
+		return esc_url_raw( $location );
 	}
 
 	/**
