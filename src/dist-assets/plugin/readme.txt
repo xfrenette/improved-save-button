@@ -2,8 +2,8 @@
 Contributors: LabelBlanc
 Tags: publish, save, close, list, edit, editing, return to list, close post, posts list, update, save and new, save and return, save and list, save and next, next post, save and previous, previous post, admin, administration, editor, multisite, custom post type, page, post
 Requires at least: 3.5
-Tested up to: 4.1.1
-Stable tag: 1.0
+Tested up to: 4.2.1
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,5 +43,15 @@ Visit 'Settings > @@plugin.name' to adjust the configuration to your needs.
 
 == Changelog ==
 
+= 1.0.1 =
+Release Date: April 30, 2015
+
+* Enhancement: Post Edit Spinner: Up to date with Wordpress 4.2 behavior.
+* Enhancement: Wordpress 4.2's new "removable query args" is now used.
+* Bug Fix: The "1 post updated" message was not always shown after a "Save and list".
+* Misc: Checked for add_query_arg() XSS attack possibility.
+
 = 1.0 =
+Release date: February 19, 2015
+
 Initial version
