@@ -30,6 +30,11 @@ if( ! class_exists( 'LB_Save_And_Then_Post_Edit' ) ) {
 class LB_Save_And_Then_Post_Edit {
 
 	/**
+	 * URL parameter defining the action to do after saving.
+	 */
+	const HTTP_PARAM_ACTION = 'lb-sat-action';
+
+	/**
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
 	static function setup() {
@@ -151,12 +156,12 @@ class LB_Save_And_Then_Post_Edit {
 		echo 'window.LabelBlanc = window.LabelBlanc || {};';
 		echo 'window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};';
 		echo 'window.LabelBlanc.SaveAndThen.ACTION_LAST = "' . LB_Save_And_Then::ACTION_LAST . '";';
-		echo 'window.LabelBlanc.SaveAndThen.HTTP_PARAM_ACTION = "' . LB_Save_And_Then::HTTP_PARAM_ACTION . '";';
+		echo 'window.LabelBlanc.SaveAndThen.HTTP_PARAM_ACTION = "' . self::HTTP_PARAM_ACTION . '";';
 		echo 'window.LabelBlanc.SaveAndThen.config = ' . json_encode( $js_object );
 		echo '</script>';
 
 		// Output of the referer in a hidden field
-		echo '<input type="hidden" name="' . LB_Save_And_Then::HTTP_PARAM_REFERER . '" value="' . wp_get_referer() . '" />';
+		echo '<input type="hidden" name="' . LB_Save_And_Then_Redirect::HTTP_PARAM_REFERER . '" value="' . wp_get_referer() . '" />';
 	}
 } // end class
 

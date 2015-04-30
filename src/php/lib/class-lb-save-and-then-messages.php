@@ -30,11 +30,32 @@ if( ! class_exists( 'LB_Save_And_Then_Messages' ) ) {
 class LB_Save_And_Then_Messages {
 
 	/**
+	 * URL parameter defining the id of the post that was being modified
+	 * before the redirect.
+	 */
+	const HTTP_PARAM_UPDATED_POST_ID = 'lb-sat-updated-post-id';
+
+	/**
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
 	static function setup() {
 		add_filter( 'post_updated_messages', array( get_called_class(), 'post_updated_messages' ), 99 );
+		add_filter( 'removable_query_args', array( get_called_class(), 'removable_query_args' ), 99 );
 	}
+
+	/**
+	 * Adds the URL param containing the last modified post id to
+	 * the list of URL params that can be removed after being used once.
+	 * 
+	 * @param  array $removable_query_args An array of parameters to remove from the URL.
+	 * @return array                       The array with the added param.
+	 */
+	static function removable_query_args( $removable_query_args ) {
+		$removable_query_args[] = self::HTTP_PARAM_UPDATED_POST_ID;
+
+		return $removable_query_args;
+	}
+
 	/**
 	 * If the plugin did a redirect, we update the success message to
 	 * show a link to the post we were.
@@ -51,11 +72,11 @@ class LB_Save_And_Then_Messages {
 	static function post_updated_messages( $messages ) {
 
 		// Only modify the messages if this plugin did a redirect
-		if( ! isset( $_REQUEST[ LB_Save_And_Then::HTTP_PARAM_UPDATED_POST_ID ] ) ) {
+		if( ! isset( $_REQUEST[ self::HTTP_PARAM_UPDATED_POST_ID ] ) ) {
 			return $messages;
 		}
 
-		$new_messages = self::get_post_updated_messages( trim( $_REQUEST[ LB_Save_And_Then::HTTP_PARAM_UPDATED_POST_ID ] ) );
+		$new_messages = self::get_post_updated_messages( trim( $_REQUEST[ self::HTTP_PARAM_UPDATED_POST_ID ] ) );
 
 		if( ! $new_messages ) {
 			return $messages;

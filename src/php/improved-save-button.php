@@ -51,26 +51,6 @@ if( !class_exists( 'LB_Save_And_Then' ) ) {
 class LB_Save_And_Then {
 
 	/**
-	 * Parameter defining the action to do after saving.
-	 * Used in the redirection.
-	 */
-	const HTTP_PARAM_ACTION = 'lb-sat-action';
-
-	/**
-	 * Parameter defining the id of the post that was being modified
-	 * before the redirect.
-	 * Used in the success message display.
-	 */
-	const HTTP_PARAM_UPDATED_POST_ID = 'lb-sat-updated-post-id';
-
-	/**
-	 * Parameter defining the page where we were before getting to the
-	 * current post edit screen.
-	 * Used in the redirection.
-	 */
-	const HTTP_PARAM_REFERER = 'lb-sat-referer';
-
-	/**
 	 * Id of the 'use last' action
 	 */
 	const ACTION_LAST = '_last';

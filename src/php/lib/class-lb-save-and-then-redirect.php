@@ -30,6 +30,12 @@ if( ! class_exists( 'LB_Save_And_Then_Redirect' ) ) {
 class LB_Save_And_Then_Redirect {
 
 	/**
+	 * URL parameter defining the page where we were before getting to the
+	 * current post edit screen.
+	 */
+	const HTTP_PARAM_REFERER = 'lb-sat-referer';
+
+	/**
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
 	static function setup() {
@@ -66,11 +72,11 @@ class LB_Save_And_Then_Redirect {
 			return $location;
 		}
 
-		if( ! isset( $_POST[ LB_Save_And_Then::HTTP_PARAM_ACTION ] ) ) {
+		if( ! isset( $_POST[ LB_Save_And_Then_Post_Edit::HTTP_PARAM_ACTION ] ) ) {
 			return $location;
 		}
 
-		$sat_action = trim( $_POST[ LB_Save_And_Then::HTTP_PARAM_ACTION ] );
+		$sat_action = trim( $_POST[ LB_Save_And_Then_Post_Edit::HTTP_PARAM_ACTION ] );
 
 		$current_post = get_post( $post_id );
 		$post_type = get_post_type( $post_id );
@@ -88,7 +94,7 @@ class LB_Save_And_Then_Redirect {
 		/****
 		 * Parameters we want to add to the URL.
 		 ****/
-		$url_get_params[ LB_Save_And_Then::HTTP_PARAM_UPDATED_POST_ID ] = $post_id;
+		$url_get_params[ LB_Save_And_Then_Messages::HTTP_PARAM_UPDATED_POST_ID ] = $post_id;
 
 		/**
 		 * We build the $new_url (without all the parameters) based on the
@@ -136,8 +142,8 @@ class LB_Save_And_Then_Redirect {
 				 * to preserve the same parameters, like orderby, paged, ... so
 				 * we only adjust this referer url and use it as $new_url
 				 */
-				if( isset( $_REQUEST[ LB_Save_And_Then::HTTP_PARAM_REFERER ] ) ) {
-					$referer_url = $_REQUEST[ LB_Save_And_Then::HTTP_PARAM_REFERER ];
+				if( isset( $_REQUEST[ self::HTTP_PARAM_REFERER ] ) ) {
+					$referer_url = $_REQUEST[ self::HTTP_PARAM_REFERER ];
 
 					// If the referer URL is the post type listing page
 					if( self::url_is_posts_list( $referer_url, $post_type ) ) {
