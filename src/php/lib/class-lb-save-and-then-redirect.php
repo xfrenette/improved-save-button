@@ -137,6 +137,9 @@ class LB_Save_And_Then_Redirect {
 				}
 				$new_url = admin_url( $admin_url );
 
+				// We reset the parameters we want to add
+				$url_get_params = array( 'updated' => '1' );
+
 				/**
 				 * If the user was already in the correct listing page, we want
 				 * to preserve the same parameters, like orderby, paged, ... so
@@ -152,9 +155,6 @@ class LB_Save_And_Then_Redirect {
 							'locked', 'skipped', 'updated', 'deleted', 'trashed', 'untrashed', 'ids'
 						);
 						$new_url = remove_query_arg( $params_to_remove, $referer_url );
-						
-						// We reset the parameters we want to add
-						$url_get_params = array( 'updated' => '1' );
 					}
 				}
 
