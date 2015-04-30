@@ -45,8 +45,13 @@ $lb-sat-media-query-sm: "screen and (max-width: 782px)";
  */
 .lb-sat-spinner {
 	#publishing-action & {
+		visibility: hidden;
 		display: inline-block;
 		float: none;
+
+		&.is-active {
+			visibility: visible;
+		}
 	}
 }
 

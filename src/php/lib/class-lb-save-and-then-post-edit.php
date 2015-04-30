@@ -55,9 +55,23 @@ class LB_Save_And_Then_Post_Edit {
 			'lb-save-and-then-post-edit',
 			LB_Save_And_Then_Utils::plugins_url( "js/post-edit{$min}.js" ),
 			array('jquery', 'utils'),
-			'1.0',
+			'1.0.1',
 			true
 		);
+
+		// If Wordpress version < 4.2, we include the backward-compatibility
+		// script.
+		$wp_version = get_bloginfo('version');
+
+		if( version_compare( $wp_version, '4.2', '<' ) ) {
+			wp_enqueue_script(
+				'lb-save-and-then-post-edit-pre-4.2',
+				LB_Save_And_Then_Utils::plugins_url( "js/backward-compatibility/post-edit.pre-4.2{$min}.js" ),
+				array('lb-save-and-then-post-edit'),
+				'1.0',
+				true
+			);
+		}
 
 		wp_enqueue_style(
 			'lb-save-and-then-post-edit',
@@ -65,7 +79,6 @@ class LB_Save_And_Then_Post_Edit {
 			array(),
 			'1.0'
 		);
-
 		if( function_exists('wp_style_add_data') ) {
 			wp_style_add_data( 'lb-save-and-then-post-edit', 'rtl', 'replace' );
 		}

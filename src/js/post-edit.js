@@ -95,7 +95,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		this.setupWordpressListeners();
 		this.newPublishButtonSet.hideMenu();
 		this.insertNewPublishButtonSet();
-		this.updateSpinner();
+		this.setupSpinner();
 
 		if( this.config.newButtonSetIsDummy ) {
 			this.newPublishButtonSet.disable( true );
@@ -119,11 +119,11 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		},
 
 		/**
-		 * Adds classes to the spinner showing the saving and
-		 * also position it near the original button.
+		 * Adds classes to the spinner (shown when saving) and
+		 * also positions it near the original button.
 		 */
-		updateSpinner : function() {
-			this.$spinner.addClass('lb-sat-spinner').hide();
+		setupSpinner : function() {
+			this.$spinner.addClass('lb-sat-spinner');
 
 			// We always position the spinner just before the original
 			// publish button. If we click on the new button, we will
@@ -282,7 +282,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			var self = this;
 
 			// Disable button while auto saving
-			// @see wordpress/wp-admin/js/post.js : 529
+			// @see wordpress/wp-admin/js/post.js
 			$(document).on( 'autosave-disable-buttons.edit-post', function() {
 				self.newPublishButtonSet.disable( true );
 			}).on( 'autosave-enable-buttons.edit-post', function() {
