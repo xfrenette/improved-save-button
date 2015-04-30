@@ -61,6 +61,7 @@ module.exports = function(grunt) {
 					cwd: '<%= dir.src.sass %>/',
 					src: ['*.scss'],
 					dest: '<%= dir.dist.css %>',
+					extDot: 'last',
 					ext: '.css'
 				}]
 			},
@@ -75,6 +76,7 @@ module.exports = function(grunt) {
 					cwd: '<%= dir.src.sass %>/',
 					src: ['*.scss'],
 					dest: '<%= dir.dist.css %>',
+					extDot: 'last',
 					ext: '.css'
 				}]
 			}
@@ -94,6 +96,7 @@ module.exports = function(grunt) {
 					cwd: '<%= dir.dist.js %>',
 					src: '**/*.js',
 					dest: '<%= dir.dist.js %>',
+					extDot: 'last',
 					ext: '.min.js'
 				}]
 			}
@@ -130,6 +133,7 @@ module.exports = function(grunt) {
 					cwd: '<%= dir.dist.css %>',
 					src: '*.css',
 					dest: '<%= dir.dist.css %>',
+					extDot: 'last',
 					ext: '-rtl.css'
 				}]
 			}
@@ -148,9 +152,14 @@ module.exports = function(grunt) {
 		},
 		potomo: {
 			languages: {
-				files: [
-					{ expand: true, cwd: '<%= dir.src.po %>/', src: ['*.po'], dest: '<%= dir.dist.languages %>', ext: '.mo' }
-				]
+				files: [{
+					expand: true,
+					cwd: '<%= dir.src.po %>/',
+					src: ['*.po'],
+					dest: '<%= dir.dist.languages %>',
+					extDot: 'last',
+					ext: '.mo'
+				}]
 			}
 		},
 		watch: {
