@@ -172,6 +172,8 @@ class LB_Save_And_Then_Redirect {
 	/**
 	 * Returns true if the $url is the listing page of $post_type.
 	 * 
+	 * @todo: should be in class LB_Save_And_Then_Utils
+	 * 
 	 * @param  string  $url       The url to check
 	 * @param  string  $post_type The post type. Defaults to 'post'
 	 * @return boolean

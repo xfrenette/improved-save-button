@@ -36,10 +36,21 @@ $lib_files_to_include = array(
 	'class-lb-save-and-then-post-edit.php',
 	'class-lb-save-and-then-redirect.php',
 	'class-lb-save-and-then-messages.php',
+	'class-lb-save-and-then-actions.php',
+	'class-lb-save-and-then-action.php',
 );
 
 foreach ( $lib_files_to_include as $file_name ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'lib' . DIRECTORY_SEPARATOR . $file_name );
+}
+
+$actions_files_to_include = array(
+	'class-lb-save-and-then-action-new.php',
+	'class-lb-save-and-then-action-list.php',
+);
+
+foreach ( $actions_files_to_include as $file_name ) {
+	require_once( plugin_dir_path( __FILE__ ) . 'actions' . DIRECTORY_SEPARATOR . $file_name );
 }
 
 if( !class_exists( 'LB_Save_And_Then' ) ) {
@@ -51,21 +62,18 @@ if( !class_exists( 'LB_Save_And_Then' ) ) {
 class LB_Save_And_Then {
 
 	/**
-	 * Id of the 'use last' action
-	 */
-	const ACTION_LAST = '_last';
-
-	/**
 	 * Main entry point of the plugin. Calls the setup function
 	 * of the other classes.
 	 */
 	static function setup() {
 		LB_Save_And_Then_Settings::setup();
-		LB_Save_And_Then_Post_Edit::setup();
-		LB_Save_And_Then_Redirect::setup();
-		LB_Save_And_Then_Messages::setup();
+		//LB_Save_And_Then_Post_Edit::setup();
+		//LB_Save_And_Then_Redirect::setup();
+		//LB_Save_And_Then_Messages::setup();
+		LB_Save_And_Then_Actions::setup();
 
 		add_action( 'admin_init', array( get_called_class(), 'load_languages' ) );
+		add_action( 'lbsat_load_actions', array( get_called_class(), 'load_default_actions' ) );
 	}
 
 	/**
@@ -75,6 +83,22 @@ class LB_Save_And_Then {
 	static function get_localized_name() {
 		$plugin_data = get_plugin_data( __FILE__, false, true );
 		return $plugin_data['Name'];
+	}
+
+	/**
+	 * @todo DOC
+	 */
+	static function load_default_actions( $actions ) {
+		$default_actions_classes = array(
+			'LB_Save_And_Then_Action_New',
+			'LB_Save_And_Then_Action_List',
+		);
+
+		foreach ( $default_actions_classes as $class_name ) {
+			$actions[] = new $class_name();
+		}
+
+		return $actions;
 	}
 
 	/**

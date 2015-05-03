@@ -163,18 +163,16 @@ class LB_Save_And_Then_Settings {
 	 * @param  array  $args  Arguments passed as last parameter in add_settings_field
 	 */
 	static function create_setting_field( $args ) {
+		// The values of all the settings
 		$options = self::get_options();
-		$actions = LB_Save_And_Then::get_actions();
+		$actions = LB_Save_And_Then_Actions::get_actions();
 		$option_field_name = self::MAIN_SETTING_NAME . '[' . $args['option_name'] . ']';
+		// The setting value for this field
 		$option_value = $options[ $args['option_name'] ];
-
-		// The key of the last action (so we don't display a line break after it).
-		end( $actions );
-		$last_action_key = key( $actions );
 
 		$html = '';
 
-		switch( $args['option_name'] ) {
+		switch ( $args['option_name'] ) {
 
 			case 'set-as-default':
 				$html .= '<fieldset><label><input type="checkbox" name="' . $option_field_name. '" value="1"' . checked( 1, $option_value, false ) . '/>';
@@ -184,15 +182,19 @@ class LB_Save_And_Then_Settings {
 			case 'actions':
 				$html .= '<fieldset>';
 
-				foreach ( $actions as $action_key => $action_data ) {
-					$html .= '<label><input type="checkbox" name="' . $option_field_name . '['. $action_key .']" value="1" data-lb-sat-settings="action" data-lb-sat-settings-value="'. $action_key .'" ' . checked( 1, $option_value[ $action_key ], false ) . '/>';
-					$html .= '<span>' . $action_data['name'] . '</span></label>';
+				foreach ( $actions as $action_index => $action ) {
+					$action_id = $action->get_id();
 
-					if( $action_data['description'] ) {
-						$html .= ' <span class="description"> — ' . $action_data['description'] . '</span>';
+					$html .= '<label><input type="checkbox" name="' . $option_field_name . '['. $action_id .']" value="1" data-lb-sat-settings="action" data-lb-sat-settings-value="'. $action_id .'" ' . checked( 1, $option_value[ $action_id ], false ) . '/>';
+					$html .= '<span>' . $action->get_name() . '</span>';
+
+					if( $action->get_description() ) {
+						$html .= ' <span class="description"> — ' . $action->get_description() . '</span>';
 					}
 
-					if( $last_action_key != $action_key ) {
+					$html .= '</label>';
+
+					if( $action_index != count( $actions ) - 1 ) {
 						$html .= '<br />';
 					}
 				}
@@ -203,28 +205,40 @@ class LB_Save_And_Then_Settings {
 			case 'default-action':
 				$html .= '<fieldset>';
 
-				$option_last_action = array(
-					LB_Save_And_Then::ACTION_LAST => array(
-						'name' => __('<em>Last used</em>', 'lb-save-and-then'),
-						'description' => __('The last action that was used', 'lb-save-and-then')
-					)
-				);
+				$action_index = -1;
 
-				$first_element = true;
+				do {
 
-				foreach ( $option_last_action + $actions as $action_key => $action_data ) {
-					if( ! $first_element ) {
+					// Special case : we show the "use last" action as first element
+					if ( -1 == $action_index ) {
+
+						$action_id = LB_Save_And_Then_Actions::ACTION_LAST;
+						$action_name = '<em>' . __('Last used', 'lb-save-and-then') . '</em>';
+						$action_description = __('The last action that was used', 'lb-save-and-then');
+
+					} else {
+
 						$html .= '<br />';
-					}
-					$first_element = false;
 
-					$html .= '<label><input type="radio" name="' . $option_field_name . '" value="'. $action_key .'" data-lb-sat-settings="default"' . checked( $action_key, $option_value, false ) . '/>';
-					$html .= '<span>' . $action_data['name'] . '</span></label>';
-
-					if( $action_key == LB_Save_And_Then::ACTION_LAST && $action_data['description'] ) {
-						$html .= ' <span class="description"> — ' . $action_data['description'] . '</span>';
+						$action = $actions[ $action_index ];
+						$action_id = $action->get_id();
+						$action_name = $action->get_name();
+						$action_description = '';
 					}
-				}
+
+					$html .= '<label><input type="radio" name="' . $option_field_name . '" value="'. $action_id .'" data-lb-sat-settings="default"' . checked( $action_id, $option_value, false ) . '/>';
+					
+					$html .= '<span>' . $action_name . '</span>';
+
+					if( $action_description ) {
+						$html .= ' <span class="description"> — ' . $action_description . '</span>';
+					}
+
+					$html .= '</label>';
+
+					$action_index++;
+
+				} while( $action_index < count( $actions ) );
 
 				$html .= '</fieldset>';
 				break;
@@ -252,7 +266,7 @@ class LB_Save_And_Then_Settings {
 	 */
 	static function validate_setting( $input ) {
 		$defaults = self::get_default_values();
-		$actions = LB_Save_And_Then::get_actions();
+		$actions = LB_Save_And_Then_Actions::get_actions();
 
 		// Defaults, if none set
 		$sanitized_input = array(
@@ -273,25 +287,27 @@ class LB_Save_And_Then_Settings {
 		if( ! isset( $input['actions'] ) )
 			$input['actions'] = array();
 
-		foreach ( $actions as $action_key => $action_value) {
-			if( isset( $input['actions'][$action_key] ) && '1' == $input['actions'][$action_key] ) {
-				$sanitized_input['actions'][$action_key] = true;
+		foreach ( $actions as $action ) {
+			$action_id = $action->get_id();
+
+			if( isset( $input['actions'][ $action_id ] ) && '1' == $input['actions'][ $action_id ] ) {
+				$sanitized_input['actions'][ $action_id ] = true;
 			} else {
-				$sanitized_input['actions'][$action_key] = false;
+				$sanitized_input['actions'][ $action_id ] = false;
 			}
 		}
 
 		// default action
 		if(
-			$input['default-action'] == LB_Save_And_Then::ACTION_LAST
+			$input['default-action'] == LB_Save_And_Then_Actions::ACTION_LAST
 			|| array_key_exists( $input['default-action'], $sanitized_input['actions'] )
-				&& $sanitized_input['actions'][$input['default-action']] === true
+				&& true == $sanitized_input['actions'][ $input['default-action'] ]
 		) {
 			$sanitized_input['default-action'] = $input['default-action'];
 		} else {
 			// We should not get here normally (but possible with a modified request),
 			// so, just in case, we use the '_last' type.
-			$sanitized_input['default-action'] = LB_Save_And_Then::ACTION_LAST;
+			$sanitized_input['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
 		}
 
 		return $sanitized_input;
@@ -310,14 +326,14 @@ class LB_Save_And_Then_Settings {
 		);
 
 		// We select all the available actions
-		$actions = LB_Save_And_Then::get_actions();
+		$actions = LB_Save_And_Then_Actions::get_actions();
 
-		foreach ( $actions as $action_key => $action_value) {
-			$defaults['actions'][$action_key] = true;
+		foreach ( $actions as $action ) {
+			$defaults['actions'][ $action->get_id() ] = true;
 		}
 
 		// The default action is the '_last' one.
-		$defaults['default-action'] = LB_Save_And_Then::ACTION_LAST;
+		$defaults['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
 
 		return $defaults;
 	}
