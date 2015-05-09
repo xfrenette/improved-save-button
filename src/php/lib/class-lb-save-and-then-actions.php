@@ -11,7 +11,9 @@ class LB_Save_And_Then_Actions {
 	static protected $special_action_last;
 
 	static function setup() {
-		add_action( 'admin_init', array( get_called_class(), 'load_actions' ) );
+		// Priority set to 9 to be sure it executes before the setting pages
+		// creates the actions list
+		add_action( 'admin_init', array( get_called_class(), 'load_actions' ), 9 );
 	}
 
 	static function load_actions() {
@@ -20,5 +22,15 @@ class LB_Save_And_Then_Actions {
 
 	static function get_actions() {
 		return self::$actions;
+	}
+
+	static function action_exists( $action_id ) {
+		foreach ( self::$actions as $action ) {
+			if ( $action->get_id() == $action_id ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

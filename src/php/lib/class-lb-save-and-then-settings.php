@@ -37,6 +37,9 @@ class LB_Save_And_Then_Settings {
 	const MAIN_SETTING_NAME = 'lb-save-and-then-options';
 	const MENU_SLUG = 'save-and-then';
 
+	static protected $cached_options;
+	static protected $cached_default_options;
+
 	/**
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
@@ -78,7 +81,7 @@ class LB_Save_And_Then_Settings {
 		register_setting(
 			self::OPTION_GROUP,
 			self::MAIN_SETTING_NAME,
-			array( get_called_class(), 'validate_setting' )
+			array( get_called_class(), 'validate_settings' )
 		);
 	}
 
@@ -264,78 +267,77 @@ class LB_Save_And_Then_Settings {
 	 * @param  array  $input  Parameters received in the request
 	 * @return array          Cleaned settings array
 	 */
-	static function validate_setting( $input ) {
-		$defaults = self::get_default_values();
+	static function validate_settings( $input ) {
 		$actions = LB_Save_And_Then_Actions::get_actions();
-
-		// Defaults, if none set
-		$sanitized_input = array(
-			'set-as-default' => false, // Default
-			'default-action' => $defaults['default-action'],
-			'actions' => array()
-		);
 
 		if( ! $input )
 			$input = array();
 
+		$sanitized_input = self::sanitize_options( $input );
+
 		// set-as-default
-		if( isset( $input['set-as-default'] ) && '1' == $input['set-as-default'] ) {
-			$sanitized_input['set-as-default'] = true;
+		if ( ! isset( $sanitized_input['set-as-default'] ) ) {
+			$sanitized_input['set-as-default'] = false;
 		}
 
-		// actions
-		if( ! isset( $input['actions'] ) )
-			$input['actions'] = array();
+		/*
+		 * If an action is missing, we set it as disabled
+		 */
+		if ( ! isset( $sanitized_input['actions'] ) ) {
+			$sanitized_input['actions'] = array();
+		}
 
 		foreach ( $actions as $action ) {
-			$action_id = $action->get_id();
-
-			if( isset( $input['actions'][ $action_id ] ) && '1' == $input['actions'][ $action_id ] ) {
-				$sanitized_input['actions'][ $action_id ] = true;
-			} else {
-				$sanitized_input['actions'][ $action_id ] = false;
+			if( ! array_key_exists( $action->get_id(), $sanitized_input['actions'] ) ) {
+				$sanitized_input['actions'][ $action->get_id() ] = false;
 			}
 		}
 
-		// default action
-		if(
-			$input['default-action'] == LB_Save_And_Then_Actions::ACTION_LAST
-			|| array_key_exists( $input['default-action'], $sanitized_input['actions'] )
-				&& true == $sanitized_input['actions'][ $input['default-action'] ]
-		) {
-			$sanitized_input['default-action'] = $input['default-action'];
-		} else {
-			// We should not get here normally (but possible with a modified request),
-			// so, just in case, we use the '_last' type.
+		// Check that the selected default action is an enabled action
+		/**
+		 * @todo  comment
+		 */
+		if ( ! isset( $sanitized_input['default-action'] ) ) {
 			$sanitized_input['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
+		}
+	
+		if ( $sanitized_input['default-action'] != LB_Save_And_Then_Actions::ACTION_LAST ) {
+			// If the default-action is a disabled action, we change it to the default value
+			if ( true != $sanitized_input['actions'][ $sanitized_input['default-action'] ] ) {
+				$sanitized_input['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
+			}
 		}
 
 		return $sanitized_input;
 	}
 
 	/**
-	 * Generates an options array with default values.
+	 * Returns the default options values.
 	 * 
 	 * @return array Associative array of options
 	 */
-	static function get_default_values() {
-		$defaults = array(
-			'set-as-default' => true,
-			'actions' => array(),
-			'default-action' => '' // Set below
-		);
+	static function get_default_options() {
+		if ( ! isset( self::$cached_default_options ) ) {
+			$defaults = array(
+				'set-as-default' => true,
+				'actions' => array(),
+				'default-action' => '' // Set below
+			);
 
-		// We select all the available actions
-		$actions = LB_Save_And_Then_Actions::get_actions();
+			// By default, all the available actions are enabled by default
+			$actions = LB_Save_And_Then_Actions::get_actions();
 
-		foreach ( $actions as $action ) {
-			$defaults['actions'][ $action->get_id() ] = true;
+			foreach ( $actions as $action ) {
+				$defaults['actions'][ $action->get_id() ] = true;
+			}
+
+			// The default action is the '_last' one.
+			$defaults['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
+
+			self::$cached_default_options = $defaults;
 		}
 
-		// The default action is the '_last' one.
-		$defaults['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
-
-		return $defaults;
+		return self::$cached_default_options;
 	}
 
 	/**
@@ -345,19 +347,75 @@ class LB_Save_And_Then_Settings {
 	 * @return array Associative array of options
 	 */
 	static function get_options() {
-		$options = get_option( self::MAIN_SETTING_NAME );
+		if ( ! isset( self::$cached_options ) ) {
+			$options = get_option( self::MAIN_SETTING_NAME );
 
-		if( ! $options )
-			$options = array();
+			if( ! $options )
+				$options = array();
 
-		return array_replace_recursive( self::get_default_values(), $options );
+			// Sanitizing any invalid value in the database
+			$options = self::sanitize_options( $options );
+
+			self::$cached_options = self::merge_options_with_default( $options );
+		}
+
+		return self::$cached_options;
+	}
+
+	/**
+	 * @todo comment
+	 * @param  array  $options [description]
+	 * @return [type]          [description]
+	 */
+	static function merge_options_with_default( $options = array() ) {
+		return array_replace_recursive( self::get_default_options(), $options );
+	}
+
+	/**
+	 * Receives an options array and sanitize its value to ensure
+	 * it has correct types and existing actions. Removes any invalid
+	 * action.
+	 * @todo  comment
+	 */
+	static function sanitize_options( $options = array() ) {
+		// 'set-as-default' action must be boolean
+		if ( isset( $options['set-as-default'] ) ) {
+			$options['set-as-default'] = (bool) $options['set-as-default']; // Ensures boolean
+		}
+
+		// 'default-action' must be an existing action
+		if ( isset( $options['default-action'] ) ) {
+			if ( ! LB_Save_And_Then_Actions::action_exists( $options['default-action'] ) ) {
+				unset( $options['default-action'] );
+			}
+		}
+
+		// Each action must exist
+		if ( isset( $options['actions'] ) ) {
+			if ( ! is_array( $options['actions'] ) ) {
+				unset( $options['actions'] );
+			} else {
+				foreach ( $options['actions'] as $action_id => $action_enabled ) {
+					if ( ! LB_Save_And_Then_Actions::action_exists( $action_id ) ) {
+						unset( $options['actions'][$action_id] );
+						continue;
+					}
+
+					$options['actions'][$action_id] = (bool) $options['actions'][$action_id];
+				}
+			}
+		}
+		
+
+		return $options;
 	}
 
 	/**
 	 * Returns an associative array of all the actions enabled in the
 	 * settings page. The keys are the action id and the values are the
 	 * action data array as returned by LB_Save_And_Then::get_actions().
-	 * 
+	 *
+	 * @todo redo with new actions classes
 	 * @return array The enabled types
 	 */
 	static function get_enabled_actions() {
