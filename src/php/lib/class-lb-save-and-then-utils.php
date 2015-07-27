@@ -118,17 +118,16 @@ class LB_Save_And_Then_Utils {
 	 * @param  string  $post_type The post type. Defaults to 'post'
 	 * @return boolean
 	 */
-	protected static function url_is_posts_list( $url, $post_type = 'post' ) {
-		$url_parts = parse_url( $url );
-		$url_params = array();
-		if( array_key_exists( 'query', $url_parts ) ) {
-			parse_str( $url_parts['query'], $url_params );
-		}
+	static function url_is_posts_list( $url, $post_type = 'post' ) {
+		$url_parts = self::parse_url( $url );
+		$url_params = $url_parts['query'];
 
 		// If no post type is set in the URL, defaults to 'post'
 		$url_post_type = isset( $url_params['post_type'] ) ? $url_params['post_type'] : 'post';
 
 		// True if the url is edit.php and the post type is the same
+		// @todo may need to check if the path is exactly the same
+		//       (with domain and everything)
 		return (
 			strpos( $url_parts['path'], 'edit.php' ) !== false
 			&&
