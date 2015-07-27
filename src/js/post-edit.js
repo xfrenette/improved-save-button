@@ -68,7 +68,8 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		 * Special case : if there is only one action, and it is not
 		 * enabled (ex : only the "Save and previous", but there is no
 		 * previous post), we save in the configuration that the
-		 * button set is "dummy".
+		 * button set is "dummy" (i.e. we show it, but it won't do
+		 * anything).
 		 */
 		if( config.actions.length === 1 && ! config.actions[0].enabled ) {
 			this.config.newButtonSetIsDummy = true;
@@ -233,7 +234,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			}
 
 			// If it is '_last', we get it from the cookie. If no cookie : fallback
-			if( SAT.ACTION_LAST === defaultActionId ) {
+			if( SAT.ACTION_LAST_ID === defaultActionId ) {
 				var cookieVal = wpCookies.get( SAT.PostEditForm.LAST_USED_COOKIE_NAME );
 
 				if( ! cookieVal ) {
@@ -544,7 +545,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			this.$mainButton.val( this.generateButtonLabel( this.action.buttonLabelPattern ) );
 
 			$.each( this.config.actions, function( i, actionData ) {
-				var $li = self.$dropdownMenu.find('[data-lb-sat-value=' + actionData.id + ']');
+				var $li = self.$dropdownMenu.find('[data-lb-sat-value="' + actionData.id + '"]');
 				$li.text( self.generateButtonLabel( actionData.buttonLabelPattern ) );
 			});
 		},

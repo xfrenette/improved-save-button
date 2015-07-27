@@ -30,12 +30,6 @@ if( ! class_exists( 'LB_Save_And_Then_Redirect' ) ) {
 class LB_Save_And_Then_Redirect {
 
 	/**
-	 * URL parameter defining the page where we were before getting to the
-	 * current post edit screen.
-	 */
-	const HTTP_PARAM_REFERER = 'lb-sat-referer';
-
-	/**
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
 	static function setup() {

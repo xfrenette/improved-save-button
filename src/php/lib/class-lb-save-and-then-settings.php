@@ -406,7 +406,6 @@ class LB_Save_And_Then_Settings {
 			}
 		}
 		
-
 		return $options;
 	}
 
@@ -420,14 +419,13 @@ class LB_Save_And_Then_Settings {
 	 */
 	static function get_enabled_actions() {
 		$options = self::get_options();
-		$all_actions = LB_Save_And_Then::get_actions();
-
 		$active_actions = array();
 
 		if( isset( $options['actions'] ) ) {
-			foreach ( $options['actions'] as $action_key => $action_value ) {
-				if( $action_value ) {
-					$active_actions[ $action_key ] = $all_actions[ $action_key ];
+			foreach ( $options['actions'] as $action_id => $action_enabled ) {
+				$action = LB_Save_And_Then_Actions::get_action( $action_id );
+				if( ! is_null( $action ) && $action_enabled ) {
+					$active_actions[ $action_id ] = $action;
 				}
 			}
 		}

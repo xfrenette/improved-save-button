@@ -122,46 +122,23 @@ class LB_Save_And_Then_Post_Edit {
 
 		// We add to $js_object all the actions and some data
 		// about them.
-		foreach ( $enabled_actions as $action_key => $action_data ) {
-			$action_info = array(
-				'id' => $action_key,
-				'buttonLabelPattern' => $action_data['button_label_pattern'],
-				'enabled' => true // may be set to false below
+		foreach ( $enabled_actions as $action ) {
+			$js_object['actions'][] = array(
+				'id' => $action->get_id(),
+				'buttonLabelPattern' => $action->get_button_label_pattern(),
+				'enabled' => $action->is_enabled(),
+				'title' => $action->get_button_title()
 			);
-
-			// If action is 'next', we check if we have a next post (same
-			// logic with 'previous'). If we don't have one, we disable
-			// the action and set a special title.
-			if( 'next' == $action_key || 'previous' == $action_key ) {
-				$adjacent_post = LB_Save_And_Then_Utils::get_adjacent_post( get_post(), $action_key );
-				
-				if( ! $adjacent_post ) {
-					$action_info['enabled'] = false;
-
-					if( 'next' == $action_key ) {
-						$action_info['title'] = __('You are at the last post', 'lb-save-and-then');
-					}
-
-					if( 'previous' == $action_key ) {
-						$action_info['title'] = __('You are at the first post', 'lb-save-and-then');
-					}
-				}
-			}
-
-			$js_object['actions'][] = $action_info;
 		}
 
 		// Output of the JavaScript object
 		echo '<script type="text/javascript">';
 		echo 'window.LabelBlanc = window.LabelBlanc || {};';
 		echo 'window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};';
-		echo 'window.LabelBlanc.SaveAndThen.ACTION_LAST = "' . LB_Save_And_Then::ACTION_LAST . '";';
+		echo 'window.LabelBlanc.SaveAndThen.ACTION_LAST_ID = "' . LB_Save_And_Then_Actions::ACTION_LAST . '";';
 		echo 'window.LabelBlanc.SaveAndThen.HTTP_PARAM_ACTION = "' . self::HTTP_PARAM_ACTION . '";';
 		echo 'window.LabelBlanc.SaveAndThen.config = ' . json_encode( $js_object );
 		echo '</script>';
-
-		// Output of the referer in a hidden field
-		echo '<input type="hidden" name="' . LB_Save_And_Then_Redirect::HTTP_PARAM_REFERER . '" value="' . wp_get_referer() . '" />';
 	}
 } // end class
 
