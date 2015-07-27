@@ -69,7 +69,7 @@ class LB_Save_And_Then {
 		LB_Save_And_Then_Settings::setup();
 		LB_Save_And_Then_Post_Edit::setup();
 		LB_Save_And_Then_Post_Save::setup();
-		//LB_Save_And_Then_Messages::setup();
+		LB_Save_And_Then_Messages::setup();
 		LB_Save_And_Then_Actions::setup();
 
 		add_action( 'admin_init', array( get_called_class(), 'load_languages' ) );

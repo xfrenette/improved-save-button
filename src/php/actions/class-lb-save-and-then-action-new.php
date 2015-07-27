@@ -32,6 +32,8 @@ class LB_Save_And_Then_Action_New extends LB_Save_And_Then_Action {
 			$params['post_type'] = $post_type;
 		}
 
+		$params[ LB_Save_And_Then_Messages::HTTP_PARAM_UPDATED_POST_ID ] = $post->ID;
+
 		// Standard query params that are kept:
 		// - message
 

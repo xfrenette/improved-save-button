@@ -52,7 +52,6 @@ class LB_Save_And_Then_Messages {
 	 */
 	static function removable_query_args( $removable_query_args ) {
 		$removable_query_args[] = self::HTTP_PARAM_UPDATED_POST_ID;
-
 		return $removable_query_args;
 	}
 
@@ -136,7 +135,7 @@ class LB_Save_And_Then_Messages {
 	 *   ...
 	 * )
 	 *
-	 * @see            Wordpress' edit-form-advanced.php:63 for usage
+	 * @see            Wordpress' edit-form-advanced.php:79 for usage
 	 * @param  string  $post_ID Id of the post that was modified
 	 * @return array   Messages per post type
 	 */
