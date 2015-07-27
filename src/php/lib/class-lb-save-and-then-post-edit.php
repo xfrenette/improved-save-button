@@ -103,6 +103,7 @@ class LB_Save_And_Then_Post_Edit {
 
 		$options = LB_Save_And_Then_Settings::get_options();
 		$enabled_actions = LB_Save_And_Then_Settings::get_enabled_actions();
+		$current_post = get_post();
 
 		// If the user didn't select any action, we quit here
 		if( ! count( $enabled_actions ) )
@@ -125,9 +126,9 @@ class LB_Save_And_Then_Post_Edit {
 		foreach ( $enabled_actions as $action ) {
 			$js_object['actions'][] = array(
 				'id' => $action->get_id(),
-				'buttonLabelPattern' => $action->get_button_label_pattern(),
-				'enabled' => $action->is_enabled(),
-				'title' => $action->get_button_title()
+				'buttonLabelPattern' => $action->get_button_label_pattern( $current_post ),
+				'enabled' => $action->is_enabled( $current_post ),
+				'title' => $action->get_button_title( $current_post ),
 			);
 		}
 

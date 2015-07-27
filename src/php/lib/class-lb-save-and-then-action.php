@@ -21,13 +21,13 @@ abstract class LB_Save_And_Then_Action {
 	 * returns true if the action can be executed in
 	 * the current context, else false
 	 */
-	function is_enabled() {
+	function is_enabled( $post ) {
 		return true;
 	}
 
-	abstract function get_button_label_pattern();
+	abstract function get_button_label_pattern( $post );
 
-	function get_button_title() {
+	function get_button_title( $post ) {
 		return '';
 	}
 

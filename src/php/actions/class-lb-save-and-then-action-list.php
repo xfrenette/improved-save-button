@@ -18,7 +18,6 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 	function check_post_list_page( $wp_screen ) {
 		if( $wp_screen->base == 'edit' ) {
 			$url = admin_url('edit.php');
-			error_log($_SERVER['QUERY_STRING']);
 
 			if( $_SERVER['QUERY_STRING'] ) {
 				$url .= '?' . $_SERVER['QUERY_STRING'];
@@ -39,7 +38,7 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 		return __('Shows the <strong>posts list</strong> after save.', 'lb-save-and-then');
 	}
 
-	function get_button_label_pattern() {
+	function get_button_label_pattern( $post ) {
 		return __('%s and List', 'lb-save-and-then');
 	}
 

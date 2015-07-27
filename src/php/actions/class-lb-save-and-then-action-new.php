@@ -14,7 +14,7 @@ class LB_Save_And_Then_Action_New extends LB_Save_And_Then_Action {
 		return __('Shows the <strong>new post</strong> form after save.', 'lb-save-and-then');
 	}
 
-	function get_button_label_pattern() {
+	function get_button_label_pattern( $post ) {
 		return __('%s and New', 'lb-save-and-then');
 	}
 

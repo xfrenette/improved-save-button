@@ -11,10 +11,10 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	}
 
 	function get_description() {
-		return __('Shows the <strong>new post itself</strong> after save.', 'lb-save-and-then');
+		return __('Shows the <strong>post itself</strong> after save.', 'lb-save-and-then');
 	}
 
-	function get_button_label_pattern() {
+	function get_button_label_pattern( $post ) {
 		return __('%s and View', 'lb-save-and-then');
 	}
 

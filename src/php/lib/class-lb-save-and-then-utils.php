@@ -29,6 +29,8 @@ if( ! class_exists( 'LB_Save_And_Then_Utils' ) ) {
 
 class LB_Save_And_Then_Utils {
 
+	static protected $adjacent_post_cache = array();
+
 	/**
 	 * Returns the full URL to a file in this plugins folder.
 	 * 
@@ -40,7 +42,6 @@ class LB_Save_And_Then_Utils {
 	 * @return string       The full URL to the file
 	 */
 	static function plugins_url( $file ) {
-		
 		return plugins_url( $file, dirname( __FILE__ ) );
 	}
 
@@ -77,38 +78,42 @@ class LB_Save_And_Then_Utils {
 	 * @return (WP_Post|null) The adjacent post or null if no post is found
 	 */
 	static function get_adjacent_post( $post, $dir = 'next' ) {
-
 		global $wpdb;
+		$cache_id = $post->ID . '-' . $dir;
 
-		$op = $dir == 'next' ? '>' : '<';
-		$order = $dir == 'next' ? 'ASC' : 'DESC';
-		$exclude_states = get_post_stati( array( 'show_in_admin_all_list' => false ) );
-		$additionnal_where = '';
+		if( ! array_key_exists( $cache_id, self::$adjacent_post_cache ) ) {
+			$op = $dir == 'next' ? '>' : '<';
+			$order = $dir == 'next' ? 'ASC' : 'DESC';
+			$exclude_states = get_post_stati( array( 'show_in_admin_all_list' => false ) );
+			$additionnal_where = '';
 
-		// If the current user cannot edit others posts, we add a WHERE clause
-		// where only the user's post are returned
-		$post_type_object = get_post_type_object( get_post_type( $post ) );
+			// If the current user cannot edit others posts, we add a WHERE clause
+			// where only the user's post are returned
+			$post_type_object = get_post_type_object( get_post_type( $post ) );
 
-		if ( ! current_user_can( $post_type_object->cap->edit_others_posts ) ) {
-			$additionnal_where .= ' AND post_author = \'' . get_current_user_id() . '\'';
+			if ( ! current_user_can( $post_type_object->cap->edit_others_posts ) ) {
+				$additionnal_where .= ' AND post_author = \'' . get_current_user_id() . '\'';
+			}
+			
+			$query = $wpdb->prepare("
+					SELECT p.ID FROM $wpdb->posts AS p
+					WHERE p.post_date $op %s AND p.post_type = %s
+					AND (p.post_status NOT IN ('" . implode( "','", $exclude_states ) . "'))
+					$additionnal_where
+					ORDER BY p.post_date $order LIMIT 1
+				",
+				 $post->post_date, $post->post_type
+			);
+			$found_post_id = $wpdb->get_var( $query );
+
+			if( $found_post_id ) {
+				self::$adjacent_post_cache[ $cache_id ] = get_post( $found_post_id );
+			} else {
+				self::$adjacent_post_cache[ $cache_id ] = null;
+			}
 		}
-		
-		$query = $wpdb->prepare("
-				SELECT p.ID FROM $wpdb->posts AS p
-				WHERE p.post_date $op %s AND p.post_type = %s
-				AND (p.post_status NOT IN ('" . implode( "','", $exclude_states ) . "'))
-				$additionnal_where
-				ORDER BY p.post_date $order LIMIT 1
-			",
-			 $post->post_date, $post->post_type
-		);
-		$found_post_id = $wpdb->get_var( $query );
 
-		if( $found_post_id ) {
-			return get_post( $found_post_id );
-		}
-
-		return null;
+		return self::$adjacent_post_cache[ $cache_id ];
 	}
 
 	/**
