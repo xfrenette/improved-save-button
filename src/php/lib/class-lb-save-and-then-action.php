@@ -30,4 +30,8 @@ abstract class LB_Save_And_Then_Action {
 	function get_button_title() {
 		return '';
 	}
+
+	function get_redirect_url( $current_url, $post ) {
+		return null;
+	}
 }

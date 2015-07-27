@@ -34,7 +34,7 @@ $lib_files_to_include = array(
 	'class-lb-save-and-then-utils.php',
 	'class-lb-save-and-then-settings.php',
 	'class-lb-save-and-then-post-edit.php',
-	'class-lb-save-and-then-redirect.php',
+	'class-lb-save-and-then-post-save.php',
 	'class-lb-save-and-then-messages.php',
 	'class-lb-save-and-then-actions.php',
 	'class-lb-save-and-then-action.php',
@@ -68,7 +68,7 @@ class LB_Save_And_Then {
 	static function setup() {
 		LB_Save_And_Then_Settings::setup();
 		LB_Save_And_Then_Post_Edit::setup();
-		//LB_Save_And_Then_Redirect::setup();
+		LB_Save_And_Then_Post_Save::setup();
 		//LB_Save_And_Then_Messages::setup();
 		LB_Save_And_Then_Actions::setup();
 
@@ -111,46 +111,6 @@ class LB_Save_And_Then {
 		$path = dirname( LB_Save_And_Then_Utils::plugin_main_file_basename() );
 		$path .= $plugin_data['DomainPath'];
 		load_plugin_textdomain( $plugin_data['TextDomain'], false, $path );
-	}
-
-	/**
-	 * Returns all the possible actions.
-	 *
-	 * Array structure :
-	 * array(
-	 *   <action id> => array(
-	 *     'name' => <Name, displayed in the settings page>,
-	 *     'button_label_pattern' => <Pattern to generate the button name
-	 *                                when the action is selected. %s is replaced
-	 *                                with the publish button label (ex: 'Update')>,
-	 *     'description' => <Displayed in the settings page>
-	 *   )
-	 * )
-	 * @return array All the available actions
-	 */
-	static function get_actions() {
-		return array(
-			'new'      => array(
-				'name' => __('Save and New', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and New', 'lb-save-and-then'),
-				'description' => __('Shows the <strong>new post</strong> form after save.', 'lb-save-and-then'),
-			),
-			'list'     => array(
-				'name' => __('Save and List', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and List', 'lb-save-and-then'),
-				'description' => __('Shows the <strong>posts list</strong> after save.', 'lb-save-and-then'),
-			),
-			'next'     => array(
-				'name' => __('Save and Next', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and Next', 'lb-save-and-then'),
-				'description' => __('Shows the <strong>next post</strong> edit form after save.', 'lb-save-and-then'),
-			),
-			'previous' => array(
-				'name' => __('Save and Previous', 'lb-save-and-then'),
-				'button_label_pattern' =>__('%s and Previous', 'lb-save-and-then'),
-				'description' => __('Shows the <strong>previous post</strong> edit form after save.', 'lb-save-and-then'),
-			),
-		);
 	}
 
 	/**

@@ -110,6 +110,50 @@ class LB_Save_And_Then_Utils {
 
 		return null;
 	}
+
+	/**
+	 * Returns true if the $url is the listing page of $post_type.
+	 * 
+	 * @param  string  $url       The url to check
+	 * @param  string  $post_type The post type. Defaults to 'post'
+	 * @return boolean
+	 */
+	protected static function url_is_posts_list( $url, $post_type = 'post' ) {
+		$url_parts = parse_url( $url );
+		$url_params = array();
+		if( array_key_exists( 'query', $url_parts ) ) {
+			parse_str( $url_parts['query'], $url_params );
+		}
+
+		// If no post type is set in the URL, defaults to 'post'
+		$url_post_type = isset( $url_params['post_type'] ) ? $url_params['post_type'] : 'post';
+
+		// True if the url is edit.php and the post type is the same
+		return (
+			strpos( $url_parts['path'], 'edit.php' ) !== false
+			&&
+			$url_post_type == $post_type
+		);
+	}
+
+	/**
+	 * from a url string, returns the address parts
+	 * and the query params as an associative array
+	 * @param  [type] $url [description]
+	 * @return [type] [description]
+	 */
+	static function parse_url( $url ) {
+		$url_parts = parse_url( $url );
+		$query = array();
+		wp_parse_str( $url_parts['query'], $query );
+		$url_parts['query'] = $query;
+		return $url_parts;
+	}
+
+	static function admin_url( $relative_url, $params = array() ) {
+		$url = admin_url( $relative_url );
+		return add_query_arg( $params, $url );
+	}
 } // end class
 
 } // end if( class_exists() )
