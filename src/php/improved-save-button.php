@@ -47,6 +47,7 @@ foreach ( $lib_files_to_include as $file_name ) {
 $actions_files_to_include = array(
 	'class-lb-save-and-then-action-new.php',
 	'class-lb-save-and-then-action-list.php',
+	'class-lb-save-and-then-action-view.php',
 );
 
 foreach ( $actions_files_to_include as $file_name ) {
@@ -92,6 +93,7 @@ class LB_Save_And_Then {
 		$default_actions_classes = array(
 			'LB_Save_And_Then_Action_New',
 			'LB_Save_And_Then_Action_List',
+			'LB_Save_And_Then_Action_View',
 		);
 
 		foreach ( $default_actions_classes as $class_name ) {
