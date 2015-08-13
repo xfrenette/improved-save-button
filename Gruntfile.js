@@ -20,6 +20,17 @@ module.exports = function(grunt) {
 			},
 			all: [ 'Gruntfile.js' ].concat( jsFileList )
 		},
+		lineending: {
+			dist: {
+				options: {
+					overwrite: true,
+					eol: 'lf'
+				},
+				files: [
+					{ expand: true, cwd: '<%= dir.dist.dist %>/', src: ['**'], dest: '' }
+				]
+			}
+		},
 		copy: {
 			php: {
 				files: [
@@ -212,6 +223,7 @@ module.exports = function(grunt) {
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
-		'makepot'
+		'makepot',
+		'lineending'
 	]);
 };
