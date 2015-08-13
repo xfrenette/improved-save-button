@@ -149,7 +149,7 @@ class LB_Save_And_Then_Settings {
 		}
 		?>
 		<div class="wrap">
-		<h2><?php printf( __('<em>%s</em> Settings', 'lb-save-and-then'), LB_Save_And_Then::get_localized_name() ); ?></h2>
+		<h1><?php printf( __('<em>%s</em> Settings', 'lb-save-and-then'), LB_Save_And_Then::get_localized_name() ); ?></h1>
 		<form method="post" action="options.php" data-lb-sat-settings="form">
 			<?php settings_fields( self::OPTION_GROUP ); ?>
 			<?php do_settings_sections( self::MENU_SLUG ); ?>

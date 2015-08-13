@@ -20,6 +20,17 @@ module.exports = function(grunt) {
 			},
 			all: [ 'Gruntfile.js' ].concat( jsFileList )
 		},
+		lineending: {
+			dist: {
+				options: {
+					overwrite: true,
+					eol: 'lf'
+				},
+				files: [
+					{ expand: true, cwd: '<%= dir.dist.dist %>/', src: ['**'], dest: '' }
+				]
+			}
+		},
 		copy: {
 			php: {
 				files: [
@@ -87,7 +98,7 @@ module.exports = function(grunt) {
 		uglify: {
 			dist: {
 				options: {
-					compress: true,
+					compress: {},
 					preserveComments: 'some',
 					banner: '/* Generated from JavaScript source files. Do not modify directly. */\n'
 				},
@@ -212,6 +223,7 @@ module.exports = function(grunt) {
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
-		'makepot'
+		'makepot',
+		'lineending'
 	]);
 };

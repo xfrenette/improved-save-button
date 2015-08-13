@@ -2,8 +2,8 @@
 Contributors: LabelBlanc
 Tags: publish, save, close, list, edit, editing, return to list, close post, posts list, update, save and new, save and return, save and list, save and next, next post, save and previous, previous post, admin, administration, editor, multisite, custom post type, page, post
 Requires at least: 3.5
-Tested up to: 4.2.1
-Stable tag: 1.0.1
+Tested up to: 4.3
+Stable tag: 1.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,11 @@ Visit 'Settings > @@plugin.name' to adjust the configuration to your needs.
 3. The settings page
 
 == Changelog ==
+
+= 1.0.2 =
+Release Date: August 13, 2015
+
+* Misc: Changed the title of the settings page from h2 to h1, like other settings pages in Wordpress 4.3
 
 = 1.0.1 =
 Release Date: April 30, 2015
