@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 		uglify: {
 			dist: {
 				options: {
-					compress: true,
+					compress: {},
 					preserveComments: 'some',
 					banner: '/* Generated from JavaScript source files. Do not modify directly. */\n'
 				},
