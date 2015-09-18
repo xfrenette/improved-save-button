@@ -45,7 +45,7 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_description() {
-		return __('Shows the <strong>post itself</strong> after save.', 'lb-save-and-then');
+		return __('Shows the <strong>post itself</strong> after save. The same window is used.', 'lb-save-and-then');
 	}
 
 	/**
@@ -53,6 +53,17 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	 */
 	function get_button_label_pattern( $post ) {
 		return __('%s and View', 'lb-save-and-then');
+	}
+
+	/**
+	 * Returns a title attribute that simply informs the
+	 * user the post will open in the same window.
+	 * 
+	 * @see LB_Save_And_Then_Action
+	 * @param WP_Post $post
+	 */	
+	function get_button_title( $post ) {
+		return __('Post will be shown in this window', 'lb-save-and-then');
 	}
 
 	/**

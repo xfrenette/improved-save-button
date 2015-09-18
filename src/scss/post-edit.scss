@@ -90,6 +90,11 @@ $lb-sat-media-query-sm: "screen and (max-width: 782px)";
 			padding-right: 8px;
 		}
 	}
+
+	// Icon alignment
+	.dashicons {
+		vertical-align: text-bottom;
+	}
 }
 
 /**

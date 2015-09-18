@@ -375,7 +375,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		 * @return {jQuery} The main button
 		 */
 		createMainButton : function() {
-			var $mainButton = $('<input type="button" />');
+			var $mainButton = $('<button />');
 
 			$mainButton.attr('class', 'button button-large lb-sat-main-button' );
 
@@ -568,14 +568,15 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			var self = this;
 
 			// Set the button value
-			this.$mainButton.val( this.generateButtonLabel( this.action.buttonLabelPattern ) );
+			this.$mainButton.html( this.generateButtonLabel( this.action.buttonLabelPattern ) );
 
 			// Set the button title
 			this.$mainButton.attr('title', this.action.title ? this.action.title : '' );
 
+			// Update the actions in the dropdown
 			$.each( this.config.actions, function( i, actionData ) {
 				var $li = self.$dropdownMenu.find('[data-lb-sat-value="' + actionData.id + '"]');
-				$li.text( self.generateButtonLabel( actionData.buttonLabelPattern ) );
+				$li.html( self.generateButtonLabel( actionData.buttonLabelPattern ) );
 			});
 		},
 

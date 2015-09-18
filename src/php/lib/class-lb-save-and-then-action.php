@@ -77,7 +77,7 @@ abstract class LB_Save_And_Then_Action {
 	 * this action. Since the label will probably be of type 'X and [action]'
 	 * where X is the default Wordpress action (ex: 'Save and new'),
 	 * '%s' in the label will be replaced with the default action name.
-	 * Ex: 'Save and %s'.
+	 * Ex: 'Save and %s'. Note that you can use HTML.
 	 * 
 	 * @param  WP_Post $post Post currently being edited
 	 * @return string

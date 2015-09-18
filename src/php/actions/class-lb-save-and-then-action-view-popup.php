@@ -35,6 +35,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * frontend page.
 	 */
 	const HTTP_PARAM_RELOAD_POPUP = 'lb-sat-reload-popup';
+	const HTML_ICON = '<span class="dashicons dashicons-external"></span>';
 
 	/**
 	 * Constructor. Adds some hooks.
@@ -82,10 +83,8 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 		 */
 		if( isset( $_GET[ self::HTTP_PARAM_RELOAD_POPUP ] ) && $_GET[ self::HTTP_PARAM_RELOAD_POPUP ] === '1' ) :
 		?>
-			jQuery(function() {
-				var url = "<?php echo get_permalink(); ?>",
-					popupWindow = window.open( url, '<?php echo $js_window_name; ?>' );
-			});
+			var url = "<?php echo get_permalink(); ?>",
+				popupWindow = window.open( url, '<?php echo $js_window_name; ?>' );
 		<?php endif;
 
 		/*
@@ -103,7 +102,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 
 			popupWindow = window.open( '', '<?php echo $js_window_name; ?>' );
 			popupWindow.document.open();
-			popupWindow.document.write("<?php _e('Please wait while the post is saved. This window will refresh automatically.', 'lb-save-and-then'); ?>");
+			popupWindow.document.write("<?php _e('Please wait while the post is being saved. This window will refresh automatically.', 'lb-save-and-then'); ?>");
 			popupWindow.document.close();
 		});
 		</script>
@@ -119,7 +118,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */		
 	function get_name() {
-		return __('Save and View (new window)', 'lb-save-and-then');
+		return __('Save and View ' . self::HTML_ICON . ' (new window)', 'lb-save-and-then');
 	}
 
 	/**
@@ -140,7 +139,18 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */	
 	function get_button_label_pattern( $post ) {
-		return __('%s and View (new window)', 'lb-save-and-then');
+		return __('%s and View ' . self::HTML_ICON, 'lb-save-and-then');
+	}
+
+	/**
+	 * Returns a title attribute that simply informs the
+	 * user the post will open in a new window.
+	 * 
+	 * @see LB_Save_And_Then_Action
+	 * @param WP_Post $post
+	 */	
+	function get_button_title( $post ) {
+		return __('Post will be shown in a new window', 'lb-save-and-then');
 	}
 
 	/**
