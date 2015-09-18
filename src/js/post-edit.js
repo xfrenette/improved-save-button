@@ -562,12 +562,16 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		/**
 		 * Updates the label of the main menu and the dropdown menu elements
 		 * based on the currently set action and the value of the original
-		 * button.
+		 * button. Also updates the title attribute.
 		 */
 		updateLabels : function() {
 			var self = this;
 
+			// Set the button value
 			this.$mainButton.val( this.generateButtonLabel( this.action.buttonLabelPattern ) );
+
+			// Set the button title
+			this.$mainButton.attr('title', this.action.title ? this.action.title : '' );
 
 			$.each( this.config.actions, function( i, actionData ) {
 				var $li = self.$dropdownMenu.find('[data-lb-sat-value="' + actionData.id + '"]');
