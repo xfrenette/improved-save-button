@@ -1,19 +1,56 @@
 <?php
 
+/**
+ * Copyright @@copyright.year Label Blanc (http://www.labelblanc.ca/)
+ *
+ * This file is part of the "@@plugin.name"
+ * Wordpress plugin.
+ *
+ * The "@@plugin.name" Wordpress plugin
+ * is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * 'Save and list' action: after saving the post, redirects to the
+ * post listing page.
+ */
 class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 
+	/**
+	 * Cookie name that contains the URL of the last 'post list'
+	 * page that was visited.
+	 */
 	const COOKIE_LAST_EDIT_URL = 'lbsat_last_edit_url';
 
+	/**
+	 * Constructor, adds a Wordpress hook to 'current_screen' action.
+	 */
 	function __construct() {
 		add_action('current_screen', array( $this, 'check_post_list_page' ) );
 	}
 
 	/**
-	 * If we are on an edit page, we save the url in a cookie.
-	 * When we do a save and list, we will return to this page.
-	 * @todo comment
-	 * @param  [type] $wp_screen [description]
-	 * @return [type] [description]
+	 * If we are on an post listing page, we save the current
+	 * URL in a cookie, including all filtering and paginating
+	 * parameters.
+	 * 
+	 * When The user uses this action, we check
+	 * if the last visited post listing page (in the cookie) is
+	 * the listing page of this post type. If so, we redirect
+	 * to this page.
+	 * 
+	 * @param  WP_Screen $wp_screen WP_Screen returned by the current_screen action
 	 */
 	function check_post_list_page( $wp_screen ) {
 		if( $wp_screen->base == 'edit' ) {
@@ -26,24 +63,52 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 		}
 	}
 	
+	/**
+	 * @see LB_Save_And_Then_Action
+	 */
 	function get_name() {
 		return __('Save and List', 'lb-save-and-then');
 	}
-
+	
+	/**
+	 * @see LB_Save_And_Then_Action
+	 */
 	function get_id() {
 		return 'labelblanc.list';
 	}
-
+	
+	/**
+	 * @see LB_Save_And_Then_Action
+	 */
 	function get_description() {
 		return __('Shows the <strong>posts list</strong> after save.', 'lb-save-and-then');
 	}
-
+	
+	/**
+	 * @see LB_Save_And_Then_Action
+	 */
 	function get_button_label_pattern( $post ) {
 		return __('%s and List', 'lb-save-and-then');
 	}
 
+	/**
+	 * Returns the post listing page URL for this post type.
+	 * If the last post listing page visited was the one
+	 * for this post, we try to return the URL with the
+	 * same filtering and paging parameters that were used.
+	 *
+	 * @see LB_Save_And_Then_Action
+	 * @param  string $current_url
+	 * @param  WP_Post $post
+	 * @return string
+	 */
 	function get_redirect_url( $current_url, $post ) {
 		$post_type = get_post_type( $post );
+
+		/**
+		 * URL parameters to add
+		 * @var array
+		 */
 		$params = array(
 			'updated' => '1'
 		);
@@ -75,5 +140,4 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 
 		return $redirect_url;
 	}
-	
 }

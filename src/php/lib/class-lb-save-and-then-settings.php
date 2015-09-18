@@ -293,9 +293,10 @@ class LB_Save_And_Then_Settings {
 			}
 		}
 
-		// Check that the selected default action is an enabled action
-		/**
-		 * @todo  comment
+		/*
+		 * Determine the default action.
+		 * - If none is set, we use the 'use last' action
+		 * - If one is set and it is disabled, we change it to the 'use last' action
 		 */
 		if ( ! isset( $sanitized_input['default-action'] ) ) {
 			$sanitized_input['default-action'] = LB_Save_And_Then_Actions::ACTION_LAST;
@@ -363,9 +364,11 @@ class LB_Save_And_Then_Settings {
 	}
 
 	/**
-	 * @todo comment
-	 * @param  array  $options [description]
-	 * @return [type]          [description]
+	 * Returns an options array with the defaults values overwritten
+	 * by the ones in the supplied array.
+	 * 
+	 * @param  array  $options Overwrites to the defaults
+	 * @return array
 	 */
 	static function merge_options_with_default( $options = array() ) {
 		return array_replace_recursive( self::get_default_options(), $options );
@@ -375,7 +378,6 @@ class LB_Save_And_Then_Settings {
 	 * Receives an options array and sanitize its value to ensure
 	 * it has correct types and existing actions. Removes any invalid
 	 * action.
-	 * @todo  comment
 	 */
 	static function sanitize_options( $options = array() ) {
 		// 'set-as-default' action must be boolean
@@ -414,7 +416,6 @@ class LB_Save_And_Then_Settings {
 	 * settings page. The keys are the action id and the values are the
 	 * action data array as returned by LB_Save_And_Then::get_actions().
 	 *
-	 * @todo redo with new actions classes
 	 * @return array The enabled types
 	 */
 	static function get_enabled_actions() {

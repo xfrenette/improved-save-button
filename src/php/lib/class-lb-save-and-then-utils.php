@@ -29,6 +29,13 @@ if( ! class_exists( 'LB_Save_And_Then_Utils' ) ) {
 
 class LB_Save_And_Then_Utils {
 
+	/**
+	 * Internal cache variable to hold the adjacents post
+	 * The keys are in the format [post-id]-[next|previous],
+	 * the values are the post object.
+	 * 
+	 * @var array
+	 */
 	static protected $adjacent_post_cache = array();
 
 	/**

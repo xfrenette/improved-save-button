@@ -71,15 +71,18 @@ class LB_Save_And_Then_Post_Save {
 			return $location;
 		}
 
+		// The LB_Save_And_Then_Action id
 		$sat_action_id = trim( $_POST[ LB_Save_And_Then_Post_Edit::HTTP_PARAM_ACTION ] );
 		$current_post = get_post( $post_id );
 
+		// We get the LB_Save_And_Then_Action
 		$sat_action = LB_Save_And_Then_Actions::get_action( $sat_action_id );
 
 		if( is_null( $sat_action ) ) {
 			return $location;
 		}
 
+		// We ask the Action where to redirect the user
 		$new_location = $sat_action->get_redirect_url( $location, $current_post );
 
 		if( $new_location ) {

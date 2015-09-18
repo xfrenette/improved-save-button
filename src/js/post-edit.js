@@ -55,6 +55,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 
 		this.$form = $form;
 		this.config = config;
+		this.action = null;
 
 		/**
 		 * The default action to show on the button. May be overwritten
@@ -201,8 +202,32 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 		 * @requires wpCookies in wordpress/wp-includes/js/utils.js
 		 */
 		setAction : function( newAction ) {
+			this.action = newAction;
 			wpCookies.set( SAT.PostEditForm.LAST_USED_COOKIE_NAME, newAction.id, 365*24*3600 );
 			this.$actionInput.val( newAction.id );
+		},
+
+		/**
+		 * Returns the action that was set by setAction
+		 * @return {object} The action
+		 */
+		getAction : function() {
+			return this.action;
+		},
+
+		/**
+		 * Submits the form. Normally called after setAction().
+		 * The 'lb-save-and-then:submit' event will be triggered
+		 * on the $form. A listening method can prevent the
+		 * form submition by calling preventDefault() on the event.
+		 */
+		submit : function() {
+			var event = $.Event('lb-save-and-then:submit');
+			this.$form.trigger( event, this );
+			
+			if( ! event.isDefaultPrevented() ) {
+				this.$originalPublishButton.trigger('click');
+			}
 		},
 
 		/**
@@ -466,7 +491,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 				self.$container.before( self.postEditForm.$spinner );
 
 				self.postEditForm.setAction( self.action );
-				self.postEditForm.$originalPublishButton.trigger('click');
+				self.postEditForm.submit();
 			});
 		},
 

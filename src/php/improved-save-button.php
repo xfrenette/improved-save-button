@@ -30,6 +30,10 @@ Text Domain: lb-save-and-then
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * All the PHP files of the plugin
+ * @var array
+ */
 $lib_files_to_include = array(
 	'class-lb-save-and-then-utils.php',
 	'class-lb-save-and-then-settings.php',
@@ -40,18 +44,25 @@ $lib_files_to_include = array(
 	'class-lb-save-and-then-action.php',
 );
 
+// Include all the PHP files of the plugin
 foreach ( $lib_files_to_include as $file_name ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'lib' . DIRECTORY_SEPARATOR . $file_name );
 }
 
+/**
+ * PHP files of the actions that come with the plugin
+ * @var array
+ */
 $actions_files_to_include = array(
 	'class-lb-save-and-then-action-new.php',
 	'class-lb-save-and-then-action-list.php',
 	'class-lb-save-and-then-action-view.php',
+	'class-lb-save-and-then-action-view-popup.php',
 	'class-lb-save-and-then-action-next.php',
 	'class-lb-save-and-then-action-previous.php',
 );
 
+// Include all the actions php files
 foreach ( $actions_files_to_include as $file_name ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'actions' . DIRECTORY_SEPARATOR . $file_name );
 }
@@ -89,7 +100,8 @@ class LB_Save_And_Then {
 	}
 
 	/**
-	 * @todo DOC
+	 * Called by the lbsat_load_actions filter. Loads all the
+	 * actions that come by default with the plugin.
 	 */
 	static function load_default_actions( $actions ) {
 		$default_actions_classes = array(
@@ -98,6 +110,7 @@ class LB_Save_And_Then {
 			'LB_Save_And_Then_Action_Previous',
 			'LB_Save_And_Then_Action_List',
 			'LB_Save_And_Then_Action_View',
+			'LB_Save_And_Then_Action_View_Popup',
 		);
 
 		foreach ( $default_actions_classes as $class_name ) {
