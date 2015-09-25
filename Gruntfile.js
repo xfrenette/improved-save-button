@@ -47,9 +47,15 @@ module.exports = function(grunt) {
 					{ expand: true, cwd: '<%= dir.src.sass %>/', src: ['**'], dest: '<%= dir.dist.sass %>/' }
 				]
 			},
-			po: {
+			languages: {
 				files: [
-					{ expand: true, cwd: '<%= dir.src.po %>/', src:['*.po'], dest: '<%= dir.dist.languages %>/' }
+					{ expand: true, cwd: '<%= dir.src.po %>/', src:['**'], dest: '<%= dir.dist.languages %>/' }
+				]
+			},
+			// Special: copies from the dist to the src
+			pot: {
+				files: [
+					{ expand: true, cwd: '<%= dir.dist.languages %>/', src:['*.pot'], dest: '<%= dir.src.po %>/' }
 				]
 			},
 			distAssets: {
@@ -215,6 +221,11 @@ module.exports = function(grunt) {
 		'sass:dev',
 		'flipcss'
 	]);
+	grunt.registerTask('preparelanguages', [
+		'build',
+		'makepot',
+		'copy:pot',
+	]);
 	grunt.registerTask('build', [
 		'jshint',
 		'clean:dist',
@@ -222,13 +233,12 @@ module.exports = function(grunt) {
 		'replace:js',
 		'replace:sass',
 		'uglify',
-		'copy:po',
-		'potomo',
 		'replace:distAssets',
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
-		'makepot',
-		'lineending'
+		'lineending',
+		// Must be after lineending
+		'copy:languages'
 	]);
 };
