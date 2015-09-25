@@ -118,7 +118,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */		
 	function get_name() {
-		return __('Save and View ' . self::HTML_ICON . ' (new window)', 'lb-save-and-then');
+		return sprintf( __('Save and View %s (new window)', 'lb-save-and-then'), self::HTML_ICON );
 	}
 
 	/**
@@ -139,7 +139,8 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */	
 	function get_button_label_pattern( $post ) {
-		return __('%s and View ' . self::HTML_ICON, 'lb-save-and-then');
+		// The first %s must be escaped, because it is not replaced by this sprintf
+		return sprintf( __('%%s and View %s', 'lb-save-and-then'), self::HTML_ICON );
 	}
 
 	/**

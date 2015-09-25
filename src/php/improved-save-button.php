@@ -86,7 +86,9 @@ class LB_Save_And_Then {
 		LB_Save_And_Then_Messages::setup();
 		LB_Save_And_Then_Actions::setup();
 
-		add_action( 'admin_init', array( get_called_class(), 'load_languages' ) );
+		// Priority 1, because the settings page is also on admin_init
+		// and uses translations
+		add_action( 'admin_init', array( get_called_class(), 'load_languages' ), 1 );
 		add_action( 'lbsat_load_actions', array( get_called_class(), 'load_default_actions' ) );
 	}
 

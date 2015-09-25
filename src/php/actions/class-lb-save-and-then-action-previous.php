@@ -83,7 +83,7 @@ class LB_Save_And_Then_Action_Previous extends LB_Save_And_Then_Action {
 			return __('You are at the first post', 'lb-save-and-then');
 		} else {
 			$previous_post = LB_Save_And_Then_Utils::get_adjacent_post( $post, 'previous' );
-			return __('Previous post is "' . $previous_post->post_title . '"', 'lb-save-and-then');
+			return sprintf( __('Previous post is "%s"', 'lb-save-and-then'), $previous_post->post_title );
 		}
 	}
 
