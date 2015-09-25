@@ -1,10 +1,10 @@
 /**
- * Copyright 2014 Label Blanc (http://www.labelblanc.ca/)
+ * Copyright @@copyright.year Label Blanc (http://www.labelblanc.ca/)
  *
- * This file is part of the "Save then create new, show list, or more..."
+ * This file is part of the "@@plugin.name"
  * Wordpress plugin.
  *
- * The "Save then create new, show list, or more..." Wordpress plugin
+ * The "@@plugin.name" Wordpress plugin
  * is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or

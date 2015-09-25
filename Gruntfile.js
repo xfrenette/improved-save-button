@@ -128,6 +128,11 @@ module.exports = function(grunt) {
 					expand: true, cwd: '<%= dir.src.js %>/', src:['**'], dest: '<%= dir.dist.js %>/'
 				}]
 			},
+			sass: {
+				files: [{
+					expand: true, cwd: '<%= dir.src.sass %>/', src:['**'], dest: '<%= dir.dist.sass %>/'
+				}]
+			},
 			distAssets: {
 				files: [{
 					expand: true, cwd: '<%= dir.src.distAssets %>/plugin', src:['**'], dest: '<%= dir.dist.plugin %>/'
@@ -215,8 +220,8 @@ module.exports = function(grunt) {
 		'clean:dist',
 		'replace:php',
 		'replace:js',
+		'replace:sass',
 		'uglify',
-		'copy:sass',
 		'copy:po',
 		'potomo',
 		'replace:distAssets',
