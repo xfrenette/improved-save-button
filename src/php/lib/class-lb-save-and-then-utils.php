@@ -133,6 +133,7 @@ class LB_Save_And_Then_Utils {
 	static function url_is_posts_list( $url, $post_type = 'post' ) {
 		$url_parts = self::parse_url( $url );
 		$url_params = $url_parts['query'];
+		$posts_list_url_base = admin_url( 'edit.php' );
 
 		// If no post type is set in the URL, defaults to 'post'
 		$url_post_type = isset( $url_params['post_type'] ) ? $url_params['post_type'] : 'post';
@@ -141,7 +142,7 @@ class LB_Save_And_Then_Utils {
 		// @todo may need to check if the path is exactly the same
 		//       (with domain and everything)
 		return (
-			strpos( $url_parts['path'], 'edit.php' ) !== false
+			strpos( $url, $posts_list_url_base ) === 0
 			&&
 			$url_post_type == $post_type
 		);
