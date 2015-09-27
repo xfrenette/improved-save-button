@@ -36,6 +36,13 @@ class LB_Save_And_Then_Settings {
 	const OPTION_GROUP = 'lb-save-and-then';
 	const MAIN_SETTING_NAME = 'lb-save-and-then-options';
 	const MENU_SLUG = 'save-and-then';
+	/**
+	 * Version of settings this plugin's version uses. Note that
+	 * it is independent of the plugin's version number, since
+	 * multiple versions of the plugin may use the same settings
+	 * format.
+	 */
+	const SETTINGS_VERSION = '1.1';
 
 	static protected $cached_options;
 	static protected $cached_default_options;
@@ -44,6 +51,7 @@ class LB_Save_And_Then_Settings {
 	 * Main entry point. Setups all the Wordpress hooks.
 	 */
 	static function setup() {
+		add_action( 'plugins_loaded', array( get_called_class(), 'check_settings_version' ) );
 		add_action( 'admin_init', array( get_called_class(), 'setup_settings' ) );
 		add_action( 'admin_init', array( get_called_class(), 'setup_settings_fields' ) );
 		add_action( 'admin_enqueue_scripts', array( get_called_class(), 'add_admin_scripts' ) );
@@ -261,8 +269,10 @@ class LB_Save_And_Then_Settings {
 
 	/**
 	 * Analyses the arguments received from the request, builds
-	 * a new 'clean' settings array (with default if required)
-	 * and returns it.
+	 * a new 'clean' settings array and returns it.
+	 * If a setting is missing, it will be set with a logical value
+	 * (which may be different than the ones provided by
+	 * self::get_default_options()).
 	 * 
 	 * @param  array  $input  Parameters received in the request
 	 * @return array          Cleaned settings array
@@ -313,7 +323,8 @@ class LB_Save_And_Then_Settings {
 	}
 
 	/**
-	 * Returns the default options values.
+	 * Returns the default options values. Used when getting the
+	 * settings. Not used when saving the settings.
 	 * 
 	 * @return array Associative array of options
 	 */
@@ -343,7 +354,8 @@ class LB_Save_And_Then_Settings {
 
 	/**
 	 * Returns an array of all the option values saved in the database,
-	 * where non-defined options are set with the defaults.
+	 * where non-defined options are set with the defaults provided
+	 * by self::get_default_options()
 	 * 
 	 * @return array Associative array of options
 	 */
@@ -433,6 +445,94 @@ class LB_Save_And_Then_Settings {
 
 		return $active_actions;
 	}
+
+	/**
+	 * Checks if the settings need an update. If so, update them.
+	 * Called by the plugins_loaded hook
+	 */
+	static function check_settings_version() {
+		if( self::do_settings_need_update() ) {
+			self::update_settings();
+		}
+	}
+
+	/**
+	 * Returns true if the settings in the database need
+	 * an update (because of plugin update) by checking the
+	 * settings version number.
+	 * 
+	 * @return boolean
+	 */
+	static function do_settings_need_update() {
+		$options = get_option( self::MAIN_SETTING_NAME );
+
+		if( ! $options ) {
+			return false;
+		}
+
+		$old_options_version = self::get_settings_version();
+
+		return version_compare( $old_options_version, self::SETTINGS_VERSION ) === -1;
+	}
+
+	/**
+	 * Updates the settings from an older version of the plugin
+	 * to the ones used in this version.
+	 */
+	static function update_settings() {
+		$options = get_option( self::MAIN_SETTING_NAME );
+
+		if( ! $options ) {
+			return;
+		}
+
+		$options['version'] = self::SETTINGS_VERSION;
+		$v1_0_actions_id_translations = array(
+			'new' => 'labelblanc.new',
+			'list' => 'labelblanc.list',
+			'next' => 'labelblanc.next',
+			'previous' => 'labelblanc.previous',
+		);
+
+		// In v1.0, we used other action names, we update those
+		if( isset( $options['actions'] ) && is_array( $options['actions'] ) ) {
+			foreach ( $options['actions'] as $action_id => $action_enabled ) {
+				if( array_key_exists( $action_id, $v1_0_actions_id_translations ) ) {
+					$new_action_id = $v1_0_actions_id_translations[ $action_id ];
+					$options['actions'][$new_action_id] = $action_enabled;
+					unset( $options['actions'][$action_id] );
+				}
+			}
+		}
+
+		// Update of the default-action name
+		if( isset( $options['default-action'] ) ) {
+			if( array_key_exists( $options['default-action'], $v1_0_actions_id_translations ) ) {
+				$options['default-action'] = $v1_0_actions_id_translations[ $options['default-action'] ];
+			}
+		}
+
+		update_option( self::MAIN_SETTING_NAME, $options );
+	}
+
+	/**
+	 * Returns the settings' format version number. Note that this number
+	 * is independent of the plugin's number since multiple plugin's
+	 * versions may use the same settings format. Returns false if the
+	 * settings do not exist yet.
+	 * 
+	 * @return string|false
+	 */
+	static function get_settings_version() {
+		$options = get_option( self::MAIN_SETTING_NAME );
+
+		if( ! $options ) {
+			return false;
+		}
+
+		return isset( $options['version'] ) ? $options['version'] : '1.0';
+	}
+
 } // end class
 
 } // end if( class_exists() )
