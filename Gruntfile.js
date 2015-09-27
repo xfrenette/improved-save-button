@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 					eol: 'lf'
 				},
 				files: [
-					{ expand: true, cwd: '<%= dir.dist.dist %>/', src: ['**'], dest: '' }
+					{ expand: true, cwd: '<%= dir.dist.dist %>/', src: ['**/*.{js,css,php,scss,txt}'], dest: '' }
 				]
 			}
 		},
@@ -237,8 +237,7 @@ module.exports = function(grunt) {
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
-		'lineending',
-		// Must be after lineending
-		'copy:languages'
+		'copy:languages',
+		'lineending'
 	]);
 };
