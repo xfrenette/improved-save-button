@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Improved Save Button 1.0.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/improved-save-"
 "button\n"
-"POT-Creation-Date: 2015-09-25 15:17:53+00:00\n"
-"PO-Revision-Date: 2015-09-25 10:19-0600\n"
+"POT-Creation-Date: 2015-10-16 17:33:01+00:00\n"
+"PO-Revision-Date: 2015-10-16 13:36-0500\n"
 "Last-Translator: Xavier Frenette <xavier@xavierfrenette.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -190,19 +190,19 @@ msgstr ""
 msgid "Page draft updated. <a target=\"_blank\" href=\"%s\">Preview page</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:103
+#: lib/class-lb-save-and-then-settings.php:111
 msgid "Display button as default"
 msgstr "Mettre le button par défaut"
 
-#: lib/class-lb-save-and-then-settings.php:112
+#: lib/class-lb-save-and-then-settings.php:120
 msgid "Actions to show"
 msgstr "Actions à afficher"
 
-#: lib/class-lb-save-and-then-settings.php:121
+#: lib/class-lb-save-and-then-settings.php:129
 msgid "Default action"
 msgstr "Action par défaut"
 
-#: lib/class-lb-save-and-then-settings.php:135
+#: lib/class-lb-save-and-then-settings.php:143
 msgid "%s Settings"
 msgstr "Réglages de %s"
 
@@ -210,42 +210,46 @@ msgstr "Réglages de %s"
 msgid "Improved Save Button"
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:148
+#: lib/class-lb-save-and-then-settings.php:156
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:152
+#: lib/class-lb-save-and-then-settings.php:160
 msgid "<em>%s</em> Settings"
 msgstr "Réglages de <em>%s</em>"
 
-#: lib/class-lb-save-and-then-settings.php:156
+#: lib/class-lb-save-and-then-settings.php:164
 msgid "Save Changes"
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:182
+#: lib/class-lb-save-and-then-settings.php:190
 msgid "Display the new save button as the default one"
 msgstr "Afficher le nouveau bouton en tant que bouton par défaut"
 
-#: lib/class-lb-save-and-then-settings.php:219
+#: lib/class-lb-save-and-then-settings.php:227
 msgid "Last used"
 msgstr "Dernière utilisée"
 
-#: lib/class-lb-save-and-then-settings.php:220
+#: lib/class-lb-save-and-then-settings.php:228
 msgid "The last action that was used"
 msgstr "La dernière action utilisée"
 
-#: lib/class-lb-save-and-then-settings.php:257
+#: lib/class-lb-save-and-then-settings.php:265
 msgid "Settings"
 msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Adds a \"Save\" button to the post edit screen that saves the post and "
-"immediately redirect to one of the common page: the post listing, the new "
-"post form or the previous or next post edit page."
+"Adds a new \"Save\" button to the Post Edit screen that saves the post and "
+"immediately redirects to one of the common screens: the Posts List, the New "
+"Post screen, the previous or next post's Edit screen or the post's frontend "
+"page."
 msgstr ""
-"Bouton qui, d'un seul clic, enregistre l'article et redirige à la liste des "
-"articles, à la page de création d'article ou à un article adjacent."
+"Rajoute un nouveau bouton d'enregistrement dans l'écran d'édition d'un "
+"article qui enregistre l'article et immédiatement redirige vers l'une des "
+"pages les plus utilisées: la liste des articles, la page de création d'un "
+"nouvel article, la page d'édition de l'article suivant ou précédent, ou la "
+"page publique de l'article lui-même."
 
 #. Author of the plugin/theme
 msgid "Label Blanc"

@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: @@plugin.name
-Description: Adds a "Save" button to the post edit screen that saves the post and immediately redirect to one of the common page: the post listing, the new post form or the previous or next post edit page.
+Description: Adds a new "Save" button to the Post Edit screen that saves the post and immediately redirects to one of the common screens: the Posts List, the New Post screen, the previous or next post's Edit screen or the post's frontend page.
 Author: Label Blanc
-Version: 1.0.2
+Version: 1.1
 Author URI: http://www.labelblanc.ca
 Domain Path: /languages/
 Text Domain: lb-save-and-then
@@ -108,9 +108,9 @@ class LB_Save_And_Then {
 	static function load_default_actions( $actions ) {
 		$default_actions_classes = array(
 			'LB_Save_And_Then_Action_New',
+			'LB_Save_And_Then_Action_List',
 			'LB_Save_And_Then_Action_Next',
 			'LB_Save_And_Then_Action_Previous',
-			'LB_Save_And_Then_Action_List',
 			'LB_Save_And_Then_Action_View',
 			'LB_Save_And_Then_Action_View_Popup',
 		);
