@@ -3,7 +3,7 @@
 Plugin Name: @@plugin.name
 Description: Adds a new "Save" button to the Post Edit screen that saves the post and immediately redirects to one of the common screens: the Posts List, the New Post screen, the previous or next post's Edit screen or the post's frontend page.
 Author: Label Blanc
-Version: 1.1
+Version: @@plugin.version
 Author URI: http://www.labelblanc.ca
 Domain Path: /languages/
 Text Domain: improved-save-button
