@@ -3,7 +3,7 @@ Contributors: LabelBlanc
 Tags: publish, save, close, list, edit, editing, return to list, close post, posts list, update, save and new, save and return, save and list, save and next, next post, save and previous, save and view, previous post, admin, administration, editor, multisite, custom post type, page, post
 Requires at least: 3.5
 Tested up to: 4.5.3
-Stable tag: 1.1
+Stable tag: @@plugin.version
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

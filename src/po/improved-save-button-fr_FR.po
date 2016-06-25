@@ -1,8 +1,8 @@
-# Copyright (C) 2014 Label Blanc
+# Copyright (C) @@copyright.year Label Blanc
 # This file is distributed under the same license as the Save and create new or show list, etc. package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Improved Save Button 1.0.2\n"
+"Project-Id-Version: @@plugin.name @@plugin.version\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/improved-save-"
 "button\n"
 "POT-Creation-Date: 2015-10-16 17:33:01+00:00\n"

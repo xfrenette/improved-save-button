@@ -47,11 +47,6 @@ module.exports = function(grunt) {
 					{ expand: true, cwd: '<%= dir.src.sass %>/', src: ['**'], dest: '<%= dir.dist.sass %>/' }
 				]
 			},
-			languages: {
-				files: [
-					{ expand: true, cwd: '<%= dir.src.po %>/', src:['**'], dest: '<%= dir.dist.languages %>/' }
-				]
-			},
 			// Special: copies from the dist to the src
 			pot: {
 				files: [
@@ -138,6 +133,11 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true, cwd: '<%= dir.src.sass %>/', src:['**'], dest: '<%= dir.dist.sass %>/'
 				}]
+			},
+			languages: {
+				files: [
+					{ expand: true, cwd: '<%= dir.src.po %>/', src:['**'], dest: '<%= dir.dist.languages %>/' }
+				]
 			},
 			distAssets: {
 				files: [{
@@ -237,7 +237,7 @@ module.exports = function(grunt) {
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
-		'copy:languages',
+		'replace:languages',
 		'lineending'
 	]);
 };
