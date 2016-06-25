@@ -190,7 +190,7 @@ module.exports = function(grunt) {
 					'<%= dir.src.php %>/*',
 					'<%= dir.src.php %>/**/*'
 				],
-				tasks: ['copy:php']
+				tasks: ['replace:php']
 			},
 			sass: {
 				files: [
@@ -221,12 +221,7 @@ module.exports = function(grunt) {
 		'sass:dev',
 		'flipcss'
 	]);
-	grunt.registerTask('preparelanguages', [
-		'build',
-		'makepot',
-		'copy:pot',
-	]);
-	grunt.registerTask('build', [
+	grunt.registerTask('preparebuild', [
 		'jshint',
 		'clean:dist',
 		'replace:php',
@@ -239,5 +234,11 @@ module.exports = function(grunt) {
 		'flipcss',
 		'replace:languages',
 		'lineending'
+	]);
+	grunt.registerTask('build', [
+		'preparebuild',
+		'makepot',
+		'copy:pot',
+		'potomo'
 	]);
 };
