@@ -6,7 +6,7 @@ Author: Label Blanc
 Version: 1.1
 Author URI: http://www.labelblanc.ca
 Domain Path: /languages/
-Text Domain: lb-save-and-then
+Text Domain: improved-save-button
 */
 
 /**

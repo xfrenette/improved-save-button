@@ -31,7 +31,7 @@ class LB_Save_And_Then_Action_New extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_name() {
-		return __('Save and New', 'lb-save-and-then');
+		return __('Save and New', 'improved-save-button');
 	}
 
 	/**
@@ -45,14 +45,14 @@ class LB_Save_And_Then_Action_New extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_description() {
-		return __('Shows the <strong>new post</strong> form after save.', 'lb-save-and-then');
+		return __('Shows the <strong>new post</strong> form after save.', 'improved-save-button');
 	}
 
 	/**
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_button_label_pattern( $post ) {
-		return __('%s and New', 'lb-save-and-then');
+		return __('%s and New', 'improved-save-button');
 	}
 
 	/**

@@ -31,7 +31,7 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */	
 	function get_name() {
-		return __('Save and View', 'lb-save-and-then');
+		return __('Save and View', 'improved-save-button');
 	}
 
 	/**
@@ -45,14 +45,14 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_description() {
-		return __('Shows the <strong>post itself</strong> after save. The same window is used.', 'lb-save-and-then');
+		return __('Shows the <strong>post itself</strong> after save. The same window is used.', 'improved-save-button');
 	}
 
 	/**
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_button_label_pattern( $post ) {
-		return __('%s and View', 'lb-save-and-then');
+		return __('%s and View', 'improved-save-button');
 	}
 
 	/**
@@ -63,7 +63,7 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	 * @param WP_Post $post
 	 */	
 	function get_button_title( $post ) {
-		return __('Post will be shown in this window', 'lb-save-and-then');
+		return __('Post will be shown in this window', 'improved-save-button');
 	}
 
 	/**

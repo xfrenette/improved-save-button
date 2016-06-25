@@ -102,7 +102,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 
 			popupWindow = window.open( '', '<?php echo $js_window_name; ?>' );
 			popupWindow.document.open();
-			popupWindow.document.write("<?php _e('Please wait while the post is being saved. This window will refresh automatically.', 'lb-save-and-then'); ?>");
+			popupWindow.document.write("<?php _e('Please wait while the post is being saved. This window will refresh automatically.', 'improved-save-button'); ?>");
 			popupWindow.document.close();
 		});
 		</script>
@@ -118,7 +118,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */		
 	function get_name() {
-		return sprintf( __('Save and View %s (new window)', 'lb-save-and-then'), self::HTML_ICON );
+		return sprintf( __('Save and View %s (new window)', 'improved-save-button'), self::HTML_ICON );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */	
 	function get_description() {
-		return __('Shows the <strong>post itself in a new window</strong> after save.', 'lb-save-and-then');
+		return __('Shows the <strong>post itself in a new window</strong> after save.', 'improved-save-button');
 	}
 
 	/**
@@ -140,7 +140,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 */	
 	function get_button_label_pattern( $post ) {
 		// The first %s must be escaped, because it is not replaced by this sprintf
-		return sprintf( __('%%s and View %s', 'lb-save-and-then'), self::HTML_ICON );
+		return sprintf( __('%%s and View %s', 'improved-save-button'), self::HTML_ICON );
 	}
 
 	/**
@@ -151,7 +151,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 	 * @param WP_Post $post
 	 */	
 	function get_button_title( $post ) {
-		return __('Post will be shown in a new window', 'lb-save-and-then');
+		return __('Post will be shown in a new window', 'improved-save-button');
 	}
 
 	/**

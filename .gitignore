@@ -1,5 +1,4 @@
 /grunt-server.config
 /node_modules
 *.mo
-/src/po/lb-save-and-then.pot
 /dist

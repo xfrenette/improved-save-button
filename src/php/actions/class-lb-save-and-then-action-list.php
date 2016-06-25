@@ -67,7 +67,7 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_name() {
-		return __('Save and List', 'lb-save-and-then');
+		return __('Save and List', 'improved-save-button');
 	}
 	
 	/**
@@ -81,14 +81,14 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_description() {
-		return __('Shows the <strong>posts list</strong> after save.', 'lb-save-and-then');
+		return __('Shows the <strong>posts list</strong> after save.', 'improved-save-button');
 	}
 	
 	/**
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_button_label_pattern( $post ) {
-		return __('%s and List', 'lb-save-and-then');
+		return __('%s and List', 'improved-save-button');
 	}
 
 	/**
