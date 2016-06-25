@@ -49,6 +49,11 @@ Visit 'Settings > @@plugin.name' to adjust the configuration to your needs.
 
 == Changelog ==
 
+= 1.1.1 =
+Release Date: June 25, 2016
+
+* Misc: code updated to allow Wordpress Translation service (text domain changed to the plugin's slug)
+
 = 1.1 =
 Release Date: October 17, 2015
 
