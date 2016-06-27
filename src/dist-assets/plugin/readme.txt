@@ -53,6 +53,7 @@ Visit 'Settings > @@plugin.name' to adjust the configuration to your needs.
 Release Date: June 25, 2016
 
 * Misc: code updated to allow Wordpress Translation service (text domain changed to the plugin's slug)
+* Languages: added fr_CA and fr_BE languages
 
 = 1.1 =
 Release Date: October 17, 2015
