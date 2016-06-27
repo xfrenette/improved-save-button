@@ -67,7 +67,7 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_name() {
-		return __('Save and List', 'improved-save-button');
+		return _x('Save and List', 'Action name (used in settings page)', 'improved-save-button');
 	}
 	
 	/**
@@ -81,14 +81,14 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_description() {
-		return __('Shows the <strong>posts list</strong> after save.', 'improved-save-button');
+		return _x('Shows the <strong>posts list</strong> after save.', 'Action description (used in settings page)', 'improved-save-button');
 	}
 	
 	/**
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_button_label_pattern( $post ) {
-		return __('%s and List', 'improved-save-button');
+		return _x('%s and List', 'Button label (used in post edit page). %s = "Publish" or "Update"', 'improved-save-button');
 	}
 
 	/**
