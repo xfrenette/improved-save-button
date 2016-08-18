@@ -27,7 +27,8 @@ window.LabelBlanc = window.LabelBlanc || {};
 window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 
 (function( $ ) {
-	var SAT = window.LabelBlanc.SaveAndThen;
+	var SAT = window.LabelBlanc.SaveAndThen,
+		$tmpDiv = $('<div/>');
 
 	/**
 	 * When the dom loads. Initialises everything if we are on
@@ -41,6 +42,20 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			new SAT.PostEditForm( $form, config );
 		}
 	});
+
+	/**
+	 * Utility function to "unescape" strings. Takes a string
+	 * with HTML encoded caracters and returns the string
+	 * with those caracters replaced with their real value.
+	 * Used mainly when passing HTML encoded text to jQuery
+	 * .attr('title', <value>).
+	 *
+	 * @param {string} escaped
+	 * @return {string}
+	 */
+	function htmlUnescape( escaped ) {
+		return $tmpDiv.html( escaped ).text();
+	}
 
 	/**
 	 * Class that represents the post edit form.
@@ -483,7 +498,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 				var $item = $('<li data-lb-sat-value="' + actionData.id + '">' + self.generateButtonLabel( actionData.buttonLabelPattern ) + '</li>');
 
 				if( actionData.title ) {
-					$item.attr( 'title', actionData.title );
+					$item.attr( 'title', htmlUnescape( actionData.title ) );
 				}
 
 				if( actionData.enabled ) {
@@ -639,7 +654,7 @@ window.LabelBlanc.SaveAndThen = window.LabelBlanc.SaveAndThen || {};
 			this.$mainButton.html( this.generateButtonLabel( this.action.buttonLabelPattern ) );
 
 			// Set the button title
-			this.$mainButton.attr('title', this.action.title ? this.action.title : '' );
+			this.$mainButton.attr('title', htmlUnescape( this.action.title ? this.action.title : '' ) );
 
 			// Update the actions in the dropdown
 			$.each( this.config.actions, function( i, actionData ) {
