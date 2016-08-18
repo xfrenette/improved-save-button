@@ -33,7 +33,7 @@ class LB_Save_And_Then_Action_Next extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_name() {
-		return __('Save and Next', 'improved-save-button');
+		return _x('Save and Next', 'Action name (used in settings page)', 'improved-save-button');
 	}
 
 	/**
@@ -47,14 +47,14 @@ class LB_Save_And_Then_Action_Next extends LB_Save_And_Then_Action {
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_description() {
-		return __('Shows the <strong>next post</strong> edit form after save.', 'improved-save-button');
+		return _x('Shows the <strong>next post</strong> edit form after save.', 'Action description (used in settings page)', 'improved-save-button');
 	}
 
 	/**
 	 * @see LB_Save_And_Then_Action
 	 */
 	function get_button_label_pattern( $post ) {
-		return __('%s and Next', 'improved-save-button');
+		return _x('%s and Next', 'Button label (used in post edit page). %s = "Publish" or "Update"', 'improved-save-button');
 	}
 
 	/**
@@ -80,10 +80,10 @@ class LB_Save_And_Then_Action_Next extends LB_Save_And_Then_Action {
 	 */
 	function get_button_title( $post ) {
 		if( ! $this->is_enabled( $post ) ) {
-			return __('You are at the last post.', 'improved-save-button');
+			return _x('You are at the last post.', 'Button title attribute (used in post edit page)', 'improved-save-button');
 		} else {
 			$next_post = LB_Save_And_Then_Utils::get_adjacent_post( $post, 'next' );
-			return sprintf( __('The next post is "%s".', 'improved-save-button'), $next_post->post_title );
+			return sprintf( _x('The next post is "%s".', 'Button title attribute (used in post edit page). %s = other post name', 'improved-save-button'), $next_post->post_title );
 		}
 	}
 

@@ -108,7 +108,7 @@ class LB_Save_And_Then_Settings {
 
 		add_settings_field(
 			'lb-save-and-then-set-as-default',
-			__('Display button as default', 'improved-save-button'),
+			_x('Display button as default', 'Used in settings page', 'improved-save-button'),
 			array( get_called_class(), 'create_setting_field' ),
 			self::MENU_SLUG,
 			$setting_section_name,
@@ -117,7 +117,7 @@ class LB_Save_And_Then_Settings {
 
 		add_settings_field(
 			'lb-save-and-then-actions',
-			__('Actions to show', 'improved-save-button'),
+			_x('Actions to show', 'Used in settings page', 'improved-save-button'),
 			array( get_called_class(), 'create_setting_field' ),
 			self::MENU_SLUG,
 			$setting_section_name,
@@ -126,7 +126,7 @@ class LB_Save_And_Then_Settings {
 
 		add_settings_field(
 			'lb-save-and-then-default-action',
-			__('Default action', 'improved-save-button'),
+			_x('Default action', 'Used in settings page', 'improved-save-button'),
 			array( get_called_class(), 'create_setting_field' ),
 			self::MENU_SLUG,
 			$setting_section_name,
@@ -140,7 +140,7 @@ class LB_Save_And_Then_Settings {
 	 */
 	static function create_administration_menu() {
 		add_options_page(
-			sprintf( __('%s Settings', 'improved-save-button'), LB_Save_And_Then::get_localized_name() ),
+			sprintf( _x('%s Settings', 'Settings page <title>. %s = plugin name', 'improved-save-button'), LB_Save_And_Then::get_localized_name() ),
 			__('@@plugin.name', 'improved-save-button'),
 			'manage_options',
 			self::MENU_SLUG,
@@ -157,7 +157,7 @@ class LB_Save_And_Then_Settings {
 		}
 		?>
 		<div class="wrap">
-		<h1><?php printf( __('<em>%s</em> Settings', 'improved-save-button'), LB_Save_And_Then::get_localized_name() ); ?></h1>
+		<h1><?php printf( _x('<em>%s</em> Settings', 'Settings page main title. %s = plugin name', 'improved-save-button'), LB_Save_And_Then::get_localized_name() ); ?></h1>
 		<form method="post" action="options.php" data-lb-sat-settings="form">
 			<?php settings_fields( self::OPTION_GROUP ); ?>
 			<?php do_settings_sections( self::MENU_SLUG ); ?>
@@ -187,7 +187,7 @@ class LB_Save_And_Then_Settings {
 
 			case 'set-as-default':
 				$html .= '<fieldset><label><input type="checkbox" name="' . $option_field_name. '" value="1"' . checked( 1, $option_value, false ) . '/>';
-				$html .= '<span>' . __('Display the new save button as the default one.', 'improved-save-button') . '</span></label></fieldset>';
+				$html .= '<span>' . _x('Display the new save button as the default one.', 'Used in settings page', 'improved-save-button') . '</span></label></fieldset>';
 				break;
 
 			case 'actions':
@@ -224,8 +224,8 @@ class LB_Save_And_Then_Settings {
 					if ( -1 == $action_index ) {
 
 						$action_id = LB_Save_And_Then_Actions::ACTION_LAST;
-						$action_name = '<em>' . __('Last used', 'improved-save-button') . '</em>';
-						$action_description = __('The last action that was used.', 'improved-save-button');
+						$action_name = '<em>' . _x('Last used', '"Last used" action name (used in settings page)', 'improved-save-button') . '</em>';
+						$action_description = _x('The last action that was used.', '"Last used" action description (used in settings page)', 'improved-save-button');
 
 					} else {
 
