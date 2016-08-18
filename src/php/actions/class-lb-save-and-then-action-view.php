@@ -63,7 +63,7 @@ class LB_Save_And_Then_Action_View extends LB_Save_And_Then_Action {
 	 * @param WP_Post $post
 	 */	
 	function get_button_title( $post ) {
-		return __('Post will be shown in this window', 'improved-save-button');
+		return __('The post will be shown in this window.', 'improved-save-button');
 	}
 
 	/**

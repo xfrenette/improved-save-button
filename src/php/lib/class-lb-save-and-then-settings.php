@@ -187,7 +187,7 @@ class LB_Save_And_Then_Settings {
 
 			case 'set-as-default':
 				$html .= '<fieldset><label><input type="checkbox" name="' . $option_field_name. '" value="1"' . checked( 1, $option_value, false ) . '/>';
-				$html .= '<span>' . __('Display the new save button as the default one', 'improved-save-button') . '</span></label></fieldset>';
+				$html .= '<span>' . __('Display the new save button as the default one.', 'improved-save-button') . '</span></label></fieldset>';
 				break;
 
 			case 'actions':
@@ -225,7 +225,7 @@ class LB_Save_And_Then_Settings {
 
 						$action_id = LB_Save_And_Then_Actions::ACTION_LAST;
 						$action_name = '<em>' . __('Last used', 'improved-save-button') . '</em>';
-						$action_description = __('The last action that was used', 'improved-save-button');
+						$action_description = __('The last action that was used.', 'improved-save-button');
 
 					} else {
 

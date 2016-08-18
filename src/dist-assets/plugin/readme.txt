@@ -15,7 +15,7 @@ This plugin adds a new and improved "Save" button to the Post Edit screen that, 
 
 * The posts list (Save and List, a.k.a. "Save and Close"),
 * The New Post screen (Save and New),
-* The Post Edit screen of the previous or next post (Save and Previous/Next)
+* The Post Edit screen of the previous or next post (Save and Previous/Next),
 * The post's page on the frontend (Save and View).
 
 This plugin saves you a lot of time when you have multiple posts, pages or custom posts to create or modify!
@@ -26,11 +26,11 @@ Through the plugin's settings page, choose which actions are available and which
 
 Detail of the actions this new button allows:
 
-* **Save and List** (a.k.a. Save and Close): in a single click, save the current post and go back to the posts list.
-* **Save and New**: save the current post and go to the New Post screen.
-* **Save and Previous**: save the current post and go to the previous post's Edit screen.
-* **Save and Next**: save the current post and go to the next post's Edit screen.
-* **Save and View** (same or new window): save the current post and show the post's page on the frontend. Can show the post in the same window or in a new one.
+* **Save and List** (a.k.a. Save and Close): in a single click, saves the current post and goes back to the posts list.
+* **Save and New**: saves the current post and goes to the New Post screen.
+* **Save and Previous**: saves the current post and goes to the previous post's Edit screen.
+* **Save and Next**: saves the current post and goes to the next post's Edit screen.
+* **Save and View** (same or new window): saves the current post and shows the post's page on the frontend. Can show the post in the same window or in a new one.
 
 == Installation ==
 

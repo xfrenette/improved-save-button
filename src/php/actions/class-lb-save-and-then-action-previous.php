@@ -80,10 +80,10 @@ class LB_Save_And_Then_Action_Previous extends LB_Save_And_Then_Action {
 	 */
 	function get_button_title( $post ) {
 		if( ! $this->is_enabled( $post ) ) {
-			return __('You are at the first post', 'improved-save-button');
+			return __('You are at the first post.', 'improved-save-button');
 		} else {
 			$previous_post = LB_Save_And_Then_Utils::get_adjacent_post( $post, 'previous' );
-			return sprintf( __('Previous post is "%s"', 'improved-save-button'), $previous_post->post_title );
+			return sprintf( __('The previous post is "%s".', 'improved-save-button'), $previous_post->post_title );
 		}
 	}
 
