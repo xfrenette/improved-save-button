@@ -3,261 +3,382 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @@plugin.name @@plugin.version\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/improved-save-"
-"button\n"
-"POT-Creation-Date: 2015-10-16 17:33:01+00:00\n"
-"PO-Revision-Date: 2015-10-16 13:36-0500\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/improved-save-button\n"
+"POT-Creation-Date: 2016-08-20 11:33-0400\n"
+"PO-Revision-Date: 2016-08-20 11:45-0400\n"
 "Last-Translator: Xavier Frenette <xavier@xavierfrenette.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: \n"
 "Language: fr_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.4\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;"
+"esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: actions/class-lb-save-and-then-action-list.php:70
+#: php/actions/class-lb-save-and-then-action-list.php:70
+msgctxt "Action name (used in settings page)"
 msgid "Save and List"
 msgstr "Enregistrer puis lister"
 
-#: actions/class-lb-save-and-then-action-list.php:84
+#: php/actions/class-lb-save-and-then-action-list.php:84
+msgctxt "Action description (used in settings page)"
 msgid "Shows the <strong>posts list</strong> after save."
-msgstr "Affiche <strong>la liste des articles</strong> après l'enregistrement"
+msgstr "Affiche <strong>la liste des articles</strong> après l'enregistrement."
 
-#: actions/class-lb-save-and-then-action-list.php:91
+#: php/actions/class-lb-save-and-then-action-list.php:91
+#, php-format
+msgctxt "Button label (used in post edit page). %s = \"Publish\" or \"Update\""
 msgid "%s and List"
 msgstr "%s et lister"
 
-#: actions/class-lb-save-and-then-action-new.php:34
+#: php/actions/class-lb-save-and-then-action-new.php:34
+msgctxt "Action name (used in settings page)"
 msgid "Save and New"
 msgstr "Enregistrer puis créer nouveau"
 
-#: actions/class-lb-save-and-then-action-new.php:48
+#: php/actions/class-lb-save-and-then-action-new.php:48
+msgctxt "Action description (used in settings page)"
 msgid "Shows the <strong>new post</strong> form after save."
-msgstr ""
-"Affiche la <strong>page de nouvel article</strong> après l'enregistrement"
+msgstr "Affiche la <strong>page de nouvel article</strong> après l'enregistrement."
 
-#: actions/class-lb-save-and-then-action-new.php:55
+#: php/actions/class-lb-save-and-then-action-new.php:55
+#, php-format
+msgctxt "Button label (used in post edit page). %s = \"Publish\" or \"Update\""
 msgid "%s and New"
 msgstr "%s et nouveau"
 
-#: actions/class-lb-save-and-then-action-next.php:36
+#: php/actions/class-lb-save-and-then-action-next.php:36
+msgctxt "Action name (used in settings page)"
 msgid "Save and Next"
 msgstr "Enregistrer puis suivant"
 
-#: actions/class-lb-save-and-then-action-next.php:50
+#: php/actions/class-lb-save-and-then-action-next.php:50
+msgctxt "Action description (used in settings page)"
 msgid "Shows the <strong>next post</strong> edit form after save."
-msgstr "Affiche <strong>le prochain article</strong> après l'enregistrement"
+msgstr "Affiche <strong>le prochain article</strong> après l'enregistrement."
 
-#: actions/class-lb-save-and-then-action-next.php:57
+#: php/actions/class-lb-save-and-then-action-next.php:57
+#, php-format
+msgctxt "Button label (used in post edit page). %s = \"Publish\" or \"Update\""
 msgid "%s and Next"
 msgstr "%s et suivant"
 
-#: actions/class-lb-save-and-then-action-next.php:83
-msgid "You are at the last post"
-msgstr "Vous êtes au dernier article"
+#: php/actions/class-lb-save-and-then-action-next.php:83
+msgctxt "Button title attribute (used in post edit page)"
+msgid "You are at the last post."
+msgstr "Vous êtes au dernier article."
 
-#: actions/class-lb-save-and-then-action-next.php:86
-msgid "Next post is \"%s\""
-msgstr "Le prochain article est \"%s\""
+#: php/actions/class-lb-save-and-then-action-next.php:86
+#, php-format
+msgctxt "Button title attribute (used in post edit page). %s = other post name"
+msgid "The next post is \"%s\"."
+msgstr "Le prochain article est \"%s\"."
 
-#: actions/class-lb-save-and-then-action-previous.php:36
+#: php/actions/class-lb-save-and-then-action-previous.php:36
+msgctxt "Action name (used in settings page)"
 msgid "Save and Previous"
 msgstr "Enregistrer puis précédent"
 
-#: actions/class-lb-save-and-then-action-previous.php:50
+#: php/actions/class-lb-save-and-then-action-previous.php:50
+msgctxt "Action description (used in settings page)"
 msgid "Shows the <strong>previous post</strong> edit form after save."
-msgstr "Affiche <strong>l'article précédent</strong> après l'enregistrement"
+msgstr "Affiche <strong>l'article précédent</strong> après l'enregistrement."
 
-#: actions/class-lb-save-and-then-action-previous.php:57
+#: php/actions/class-lb-save-and-then-action-previous.php:57
+#, php-format
+msgctxt "Button label (used in post edit page). %s = \"Publish\" or \"Update\""
 msgid "%s and Previous"
 msgstr "%s et précédent"
 
-#: actions/class-lb-save-and-then-action-previous.php:83
-msgid "You are at the first post"
-msgstr "Vous êtes au premier article"
+#: php/actions/class-lb-save-and-then-action-previous.php:83
+msgctxt "Button title attribute (used in post edit page)"
+msgid "You are at the first post."
+msgstr "Vous êtes au premier article."
 
-#: actions/class-lb-save-and-then-action-previous.php:86
-msgid "Previous post is \"%s\""
-msgstr "L'article précédent est \"%s\""
+#: php/actions/class-lb-save-and-then-action-previous.php:86
+#, php-format
+msgctxt "Button title attribute (used in post edit page). %s = other post name"
+msgid "The previous post is \"%s\"."
+msgstr "L'article précédent est \"%s\"."
 
-#: actions/class-lb-save-and-then-action-view-popup.php:105
-msgid ""
-"Please wait while the post is being saved. This window will refresh "
-"automatically."
-msgstr ""
-"Veuillez attendre que l'article soit sauvegardé. Cette fenêtre se "
-"rafraîchira automatiquement."
+#: php/actions/class-lb-save-and-then-action-view-popup.php:105
+msgid "Please wait while the post is being saved. This window will refresh automatically."
+msgstr "Veuillez attendre que l'article soit sauvegardé. Cette fenêtre se rafraîchira automatiquement."
 
-#: actions/class-lb-save-and-then-action-view-popup.php:121
+#: php/actions/class-lb-save-and-then-action-view-popup.php:121
+#, php-format
+msgctxt "Action name (used in settings page). %s = new window icon"
 msgid "Save and View %s (new window)"
 msgstr "Enregistrer puis afficher %s (nouvelle fenêtre)"
 
-#: actions/class-lb-save-and-then-action-view-popup.php:135
+#: php/actions/class-lb-save-and-then-action-view-popup.php:135
+msgctxt "Action description (used in settings page)"
 msgid "Shows the <strong>post itself in a new window</strong> after save."
-msgstr ""
-"Affiche <strong>l'article dans une nouvelle fenêtre</strong> après "
-"l'enregistrement"
+msgstr "Affiche <strong>l'article dans une nouvelle fenêtre</strong> après l'enregistrement."
 
-#: actions/class-lb-save-and-then-action-view-popup.php:143
+#: php/actions/class-lb-save-and-then-action-view-popup.php:143
+#, php-format
+msgctxt "Button label (used in post edit page). %%s = \"Publish\" or \"Update\"; %s = new window icon"
 msgid "%%s and View %s"
 msgstr "%%s et afficher %s"
 
-#: actions/class-lb-save-and-then-action-view-popup.php:154
-msgid "Post will be shown in a new window"
-msgstr "L'article s'affichera dans une nouvelle fenêtre"
+#: php/actions/class-lb-save-and-then-action-view-popup.php:154
+msgctxt "Button title attribute (used in post edit page)"
+msgid "The post will be shown in a new window."
+msgstr "L'article s'affichera dans une nouvelle fenêtre."
 
-#: actions/class-lb-save-and-then-action-view.php:34
+#: php/actions/class-lb-save-and-then-action-view.php:34
+msgctxt "Action name (used in settings page)"
 msgid "Save and View"
 msgstr "Enregistrer puis afficher"
 
-#: actions/class-lb-save-and-then-action-view.php:48
-msgid ""
-"Shows the <strong>post itself</strong> after save. The same window is used."
-msgstr ""
-"Affiche <strong>l'article</strong> après l'enregistrement. Utilise la même "
-"fenêtre"
+#: php/actions/class-lb-save-and-then-action-view.php:48
+msgctxt "Action description (used in settings page)"
+msgid "Shows the <strong>post itself</strong> after save. The same window is used."
+msgstr "Affiche <strong>l'article</strong> après l'enregistrement. Utilise la même fenêtre."
 
-#: actions/class-lb-save-and-then-action-view.php:55
+#: php/actions/class-lb-save-and-then-action-view.php:55
+#, php-format
+msgctxt "Button label (used in post edit page). %s = \"Publish\" or \"Update\""
 msgid "%s and View"
 msgstr "%s et afficher"
 
-#: actions/class-lb-save-and-then-action-view.php:66
-msgid "Post will be shown in this window"
-msgstr "L'article s'affichera dans cette fenêtre"
+#: php/actions/class-lb-save-and-then-action-view.php:66
+msgctxt "Button title attribute (used in post edit page)"
+msgid "The post will be shown in this window."
+msgstr "L'article s'affichera dans une nouvelle fenêtre."
 
-#: lib/class-lb-save-and-then-messages.php:155
+#: php/lib/class-lb-save-and-then-messages.php:155
+#, php-format
 msgid "Post updated. <a href=\"%s\">View post</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:156
+#: php/lib/class-lb-save-and-then-messages.php:156
 msgid "Post updated."
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:157
+#: php/lib/class-lb-save-and-then-messages.php:157
+#, php-format
 msgid "Post published. <a href=\"%s\">View post</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:158
+#: php/lib/class-lb-save-and-then-messages.php:158
+#, php-format
 msgid "Post submitted. <a target=\"_blank\" href=\"%s\">Preview post</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:160
-msgid ""
-"Post scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
-"\">Preview post</a>"
+#: php/lib/class-lb-save-and-then-messages.php:160
+#, php-format
+msgid "Post scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview post</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:161
-#: lib/class-lb-save-and-then-messages.php:173
+#: php/lib/class-lb-save-and-then-messages.php:161 php/lib/class-lb-save-and-then-messages.php:173
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:163
+#: php/lib/class-lb-save-and-then-messages.php:163
+#, php-format
 msgid "Post draft updated. <a target=\"_blank\" href=\"%s\">Preview post</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:167
+#: php/lib/class-lb-save-and-then-messages.php:167
+#, php-format
 msgid "Page updated. <a href=\"%s\">View page</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:168
+#: php/lib/class-lb-save-and-then-messages.php:168
 msgid "Page updated."
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:169
+#: php/lib/class-lb-save-and-then-messages.php:169
+#, php-format
 msgid "Page published. <a href=\"%s\">View page</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:170
+#: php/lib/class-lb-save-and-then-messages.php:170
+#, php-format
 msgid "Page submitted. <a target=\"_blank\" href=\"%s\">Preview page</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:172
-msgid ""
-"Page scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
-"\">Preview page</a>"
+#: php/lib/class-lb-save-and-then-messages.php:172
+#, php-format
+msgid "Page scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview page</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-messages.php:175
+#: php/lib/class-lb-save-and-then-messages.php:175
+#, php-format
 msgid "Page draft updated. <a target=\"_blank\" href=\"%s\">Preview page</a>"
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:111
+#: php/lib/class-lb-save-and-then-settings.php:111
+msgctxt "Used in settings page"
 msgid "Display button as default"
 msgstr "Mettre le button par défaut"
 
-#: lib/class-lb-save-and-then-settings.php:120
+#: php/lib/class-lb-save-and-then-settings.php:120
+msgctxt "Used in settings page"
 msgid "Actions to show"
 msgstr "Actions à afficher"
 
-#: lib/class-lb-save-and-then-settings.php:129
+#: php/lib/class-lb-save-and-then-settings.php:129
+msgctxt "Used in settings page"
 msgid "Default action"
 msgstr "Action par défaut"
 
-#: lib/class-lb-save-and-then-settings.php:143
+#: php/lib/class-lb-save-and-then-settings.php:143
+#, php-format
+msgctxt "Settings page <title>. %s = plugin name"
 msgid "%s Settings"
 msgstr "Réglages de %s"
 
-#. Plugin Name of the plugin/theme
-msgid "Improved Save Button"
-msgstr ""
+#: php/lib/class-lb-save-and-then-settings.php:144
+msgid "@@plugin.name"
+msgstr "@@plugin.name"
 
-#: lib/class-lb-save-and-then-settings.php:156
+#: php/lib/class-lb-save-and-then-settings.php:156
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:160
+#: php/lib/class-lb-save-and-then-settings.php:160
+#, php-format
+msgctxt "Settings page main title. %s = plugin name"
 msgid "<em>%s</em> Settings"
 msgstr "Réglages de <em>%s</em>"
 
-#: lib/class-lb-save-and-then-settings.php:164
+#: php/lib/class-lb-save-and-then-settings.php:164
 msgid "Save Changes"
 msgstr ""
 
-#: lib/class-lb-save-and-then-settings.php:190
-msgid "Display the new save button as the default one"
-msgstr "Afficher le nouveau bouton en tant que bouton par défaut"
+#: php/lib/class-lb-save-and-then-settings.php:190
+msgctxt "Used in settings page"
+msgid "Display the new save button as the default one."
+msgstr "Afficher le nouveau bouton en tant que bouton par défaut."
 
-#: lib/class-lb-save-and-then-settings.php:227
+#: php/lib/class-lb-save-and-then-settings.php:227
+msgctxt "\"Last used\" action name (used in settings page)"
 msgid "Last used"
 msgstr "Dernière utilisée"
 
-#: lib/class-lb-save-and-then-settings.php:228
-msgid "The last action that was used"
-msgstr "La dernière action utilisée"
+#: php/lib/class-lb-save-and-then-settings.php:228
+msgctxt "\"Last used\" action description (used in settings page)"
+msgid "The last action that was used."
+msgstr "La dernière action utilisée."
 
-#: lib/class-lb-save-and-then-settings.php:265
+#: php/lib/class-lb-save-and-then-settings.php:265
 msgid "Settings"
-msgstr ""
+msgstr "Réglages"
 
-#. Description of the plugin/theme
-msgid ""
-"Adds a new \"Save\" button to the Post Edit screen that saves the post and "
-"immediately redirects to one of the common screens: the Posts List, the New "
-"Post screen, the previous or next post's Edit screen or the post's frontend "
-"page."
-msgstr ""
-"Rajoute un nouveau bouton d'enregistrement dans l'écran d'édition d'un "
-"article qui enregistre l'article et immédiatement redirige vers l'une des "
-"pages les plus utilisées: la liste des articles, la page de création d'un "
-"nouvel article, la page d'édition de l'article suivant ou précédent, ou la "
-"page publique de l'article lui-même."
+#~ msgid "Save and List"
+#~ msgstr "Enregistrer puis lister"
 
-#. Author of the plugin/theme
-msgid "Label Blanc"
-msgstr ""
+#~ msgid "Shows the <strong>posts list</strong> after save."
+#~ msgstr "Affiche <strong>la liste des articles</strong> après l'enregistrement"
 
-#. Author URI of the plugin/theme
-msgid "http://www.labelblanc.ca"
-msgstr ""
+#~ msgid "%s and List"
+#~ msgstr "%s et lister"
+
+#~ msgid "Save and New"
+#~ msgstr "Enregistrer puis créer nouveau"
+
+#~ msgid "Shows the <strong>new post</strong> form after save."
+#~ msgstr "Affiche la <strong>page de nouvel article</strong> après l'enregistrement"
+
+#~ msgid "%s and New"
+#~ msgstr "%s et nouveau"
+
+#~ msgid "Save and Next"
+#~ msgstr "Enregistrer puis suivant"
+
+#~ msgid "Shows the <strong>next post</strong> edit form after save."
+#~ msgstr "Affiche <strong>le prochain article</strong> après l'enregistrement"
+
+#~ msgid "%s and Next"
+#~ msgstr "%s et suivant"
+
+#~ msgid "You are at the last post"
+#~ msgstr "Vous êtes au dernier article"
+
+#~ msgid "Next post is \"%s\""
+#~ msgstr "Le prochain article est \"%s\""
+
+#~ msgid "Save and Previous"
+#~ msgstr "Enregistrer puis précédent"
+
+#~ msgid "Shows the <strong>previous post</strong> edit form after save."
+#~ msgstr "Affiche <strong>l'article précédent</strong> après l'enregistrement"
+
+#~ msgid "%s and Previous"
+#~ msgstr "%s et précédent"
+
+#~ msgid "You are at the first post"
+#~ msgstr "Vous êtes au premier article"
+
+#~ msgid "Previous post is \"%s\""
+#~ msgstr "L'article précédent est \"%s\""
+
+#~ msgid "Save and View %s (new window)"
+#~ msgstr "Enregistrer puis afficher %s (nouvelle fenêtre)"
+
+#~ msgid "Shows the <strong>post itself in a new window</strong> after save."
+#~ msgstr "Affiche <strong>l'article dans une nouvelle fenêtre</strong> après l'enregistrement"
+
+#~ msgid "%%s and View %s"
+#~ msgstr "%%s et afficher %s"
+
+#~ msgid "Post will be shown in a new window"
+#~ msgstr "L'article s'affichera dans une nouvelle fenêtre"
+
+#~ msgid "Save and View"
+#~ msgstr "Enregistrer puis afficher"
+
+#~ msgid "Shows the <strong>post itself</strong> after save. The same window is used."
+#~ msgstr "Affiche <strong>l'article</strong> après l'enregistrement. Utilise la même fenêtre"
+
+#~ msgid "%s and View"
+#~ msgstr "%s et afficher"
+
+#~ msgid "Post will be shown in this window"
+#~ msgstr "L'article s'affichera dans cette fenêtre"
+
+#~ msgid "Display button as default"
+#~ msgstr "Mettre le button par défaut"
+
+#~ msgid "Actions to show"
+#~ msgstr "Actions à afficher"
+
+#~ msgid "Default action"
+#~ msgstr "Action par défaut"
+
+#~ msgid "%s Settings"
+#~ msgstr "Réglages de %s"
+
+#~ msgid "<em>%s</em> Settings"
+#~ msgstr "Réglages de <em>%s</em>"
+
+#~ msgid "Display the new save button as the default one"
+#~ msgstr "Afficher le nouveau bouton en tant que bouton par défaut"
+
+#~ msgid "Last used"
+#~ msgstr "Dernière utilisée"
+
+#~ msgid "The last action that was used"
+#~ msgstr "La dernière action utilisée"
+
+#~ msgid ""
+#~ "Adds a new \"Save\" button to the Post Edit screen that saves the post and immediately redirects "
+#~ "to one of the common screens: the Posts List, the New Post screen, the previous or next post's "
+#~ "Edit screen or the post's frontend page."
+#~ msgstr ""
+#~ "Rajoute un nouveau bouton d'enregistrement dans l'écran d'édition d'un article qui enregistre "
+#~ "l'article et immédiatement redirige vers l'une des pages les plus utilisées: la liste des "
+#~ "articles, la page de création d'un nouvel article, la page d'édition de l'article suivant ou "
+#~ "précédent, ou la page publique de l'article lui-même."
 
 #~ msgid "Save and then..."
 #~ msgstr "Enregistrer puis&nbsp;..."
