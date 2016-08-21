@@ -5,7 +5,7 @@ Description: Adds a new "Save" button to the Post Edit screen that saves the pos
 Author: Label Blanc
 Version: @@plugin.version
 Author URI: http://www.labelblanc.ca
-Domain Path: /languages/
+Domain Path: /
 Text Domain: improved-save-button
 */
 

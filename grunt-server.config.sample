@@ -14,8 +14,7 @@
 			"plugin"       : "<%= dir.dist.dist %>/improved-save-button",
 			"js"           : "<%= dir.dist.plugin %>/js",
 			"sass"         : "<%= dir.dist.plugin %>/scss",
-			"css"          : "<%= dir.dist.plugin %>/css",
-			"languages"    : "<%= dir.dist.plugin %>/languages"
+			"css"          : "<%= dir.dist.plugin %>/css"
 		}
 	}
 }

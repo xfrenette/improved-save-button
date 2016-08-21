@@ -47,12 +47,6 @@ module.exports = function(grunt) {
 					{ expand: true, cwd: '<%= dir.src.sass %>/', src: ['**'], dest: '<%= dir.dist.sass %>/' }
 				]
 			},
-			// Special: copies from the dist to the src
-			pot: {
-				files: [
-					{ expand: true, cwd: '<%= dir.dist.languages %>/', src:['*.pot'], dest: '<%= dir.src.po %>/' }
-				]
-			},
 			distAssets: {
 				files: [
 					{ expand: true, cwd: '<%= dir.src.distAssets %>/assets', src:['**'], dest: '<%= dir.dist.assets %>' }
@@ -134,11 +128,6 @@ module.exports = function(grunt) {
 					expand: true, cwd: '<%= dir.src.sass %>/', src:['**'], dest: '<%= dir.dist.sass %>/'
 				}]
 			},
-			languages: {
-				files: [
-					{ expand: true, cwd: '<%= dir.src.po %>/', src:['**'], dest: '<%= dir.dist.languages %>/' }
-				]
-			},
 			distAssets: {
 				files: [{
 					expand: true, cwd: '<%= dir.src.distAssets %>/plugin', src:['**'], dest: '<%= dir.dist.plugin %>/'
@@ -157,30 +146,6 @@ module.exports = function(grunt) {
 					dest: '<%= dir.dist.css %>',
 					extDot: 'last',
 					ext: '-rtl.css'
-				}]
-			}
-		},
-		makepot: {
-			main: {
-				options: {
-					cwd: '<%= dir.dist.plugin %>',
-					mainFile: 'improved-save-button.php',
-					type: 'wp-plugin',
-					potHeaders: {
-						poedit: true
-					}
-				}
-			}
-		},
-		potomo: {
-			languages: {
-				files: [{
-					expand: true,
-					cwd: '<%= dir.src.po %>/',
-					src: ['*.po'],
-					dest: '<%= dir.dist.languages %>',
-					extDot: 'last',
-					ext: '.mo'
 				}]
 			}
 		},
@@ -221,7 +186,7 @@ module.exports = function(grunt) {
 		'sass:dev',
 		'flipcss'
 	]);
-	grunt.registerTask('preparebuild', [
+	grunt.registerTask('build', [
 		'jshint',
 		'clean:dist',
 		'replace:php',
@@ -232,13 +197,6 @@ module.exports = function(grunt) {
 		'copy:distAssets',
 		'sass:dist',
 		'flipcss',
-		'replace:languages',
 		'lineending'
-	]);
-	grunt.registerTask('build', [
-		'preparebuild',
-		'makepot',
-		'copy:pot',
-		'potomo'
 	]);
 };
