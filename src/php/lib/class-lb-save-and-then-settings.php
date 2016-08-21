@@ -153,7 +153,7 @@ class LB_Save_And_Then_Settings {
 	 */
 	static function create_options_page() {
 		if ( ! current_user_can( 'manage_options' ) )  {
-			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+			wp_die( _x( 'You do not have sufficient permissions to access this page.', 'Shown when trying to access the settings page without proper permissions.', 'improved-save-button' ) );
 		}
 		?>
 		<div class="wrap">
@@ -161,7 +161,7 @@ class LB_Save_And_Then_Settings {
 		<form method="post" action="options.php" data-lb-sat-settings="form">
 			<?php settings_fields( self::OPTION_GROUP ); ?>
 			<?php do_settings_sections( self::MENU_SLUG ); ?>
-			<input type="submit" value="<?php esc_attr_e('Save Changes'); ?>"class="button button-primary" />
+			<input type="submit" value="<?php echo esc_attr( _x('Save Changes', 'Settings page\'s save button', 'improved-save-button')); ?>"class="button button-primary" />
 		</form>
 		</div>
 		<?php
@@ -262,7 +262,7 @@ class LB_Save_And_Then_Settings {
 	 * Creates the "Settings" link in the plugins page.
 	 */
 	static function plugin_settings_link( $links ) {
-		$settings_link = '<a href="options-general.php?page=' . self::MENU_SLUG . '">' . __('Settings') . '</a>'; 
+		$settings_link = '<a href="options-general.php?page=' . self::MENU_SLUG . '">' . _x('Settings', 'Settings link for this plugin, in the plugins listing page.', 'improved-save-button') . '</a>'; 
 		array_unshift( $links, $settings_link ); 
 		return $links; 
 	}

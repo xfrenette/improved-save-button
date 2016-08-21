@@ -120,9 +120,10 @@ class LB_Save_And_Then_Messages {
 
 				// We update the published date
 				if( 9 == $code ) {
+					$date_format = _x('M j, Y @ H:i', 'Date format used to find and replace the date in success message for scheduled posts. Important: translate with *exactly* the official Wordpress translation for this string.', 'improved-save-button');
 					$previous_post = get_post( $previous_post_ID );
-					$current_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $current_post->post_date ) );
-					$previous_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $previous_post->post_date ) );
+					$current_date = date_i18n( $date_format, strtotime( $current_post->post_date ) );
+					$previous_date = date_i18n( $date_format, strtotime( $previous_post->post_date ) );
 
 					$new_message = str_replace($current_date, $previous_date, $message);
 					$message_changed = true;

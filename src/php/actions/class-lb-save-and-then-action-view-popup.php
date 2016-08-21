@@ -102,7 +102,7 @@ class LB_Save_And_Then_Action_View_Popup extends LB_Save_And_Then_Action {
 
 			popupWindow = window.open( '', '<?php echo $js_window_name; ?>' );
 			popupWindow.document.open();
-			popupWindow.document.write("<?php _e('Please wait while the post is being saved. This window will refresh automatically.', 'improved-save-button'); ?>");
+			popupWindow.document.write("<?php _ex('Please wait while the post is being saved. This window will refresh automatically.', 'Message shown in the new window when "Save and view (new window)" is used.', 'improved-save-button'); ?>");
 			popupWindow.document.close();
 		});
 		</script>
