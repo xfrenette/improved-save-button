@@ -56,15 +56,17 @@ class LB_Save_And_Then_Messages {
 	}
 
 	/**
-	 * If the plugin did a redirect, we update the success message to
-	 * show a link to the post we were.
+	 * If the plugin did a redirect, we update the success messages.
+	 * The regular messages always contain links and date of the
+	 * currently show post, but, if we did a redirect, we want to
+	 * change them to reflect the post where we were.
 	 *
-	 * Called by the post_updated_messages filter. Wordpress' default messages
-	 * are updated. The message is only shown when the
-	 * redirected page (the page shown after saving) is the 'edit' or
-	 * 'new' post page. It doesn't show on a 'list posts' page.
+	 * Called by the post_updated_messages filter. The message is
+	 * only shown when the redirected page (the page shown after
+	 * saving) is the 'edit' or 'new' post page. It doesn't show
+	 * on a 'list posts' page.
 	 *
-	 * @see          Wordpress' edit-form-advanced.php:63
+	 * @see          wp-admin/edit-form-advanced.php ($messages variable)
 	 * @param  array $messages Associative array of messages per post type
 	 * @return array The modified messages array
 	 */
@@ -75,105 +77,62 @@ class LB_Save_And_Then_Messages {
 			return $messages;
 		}
 
-		$new_messages = self::get_post_updated_messages( trim( $_REQUEST[ self::HTTP_PARAM_UPDATED_POST_ID ] ) );
+		// In the default messages, the post URL references the
+		// current post. With our plugin, we need to change
+		// those URLs to the ones of the post that was just edited.
 
-		if( ! $new_messages ) {
+		$current_post = get_post();
+		$post_ID = $current_post->ID;
+		$previous_post_ID = trim( $_REQUEST[ self::HTTP_PARAM_UPDATED_POST_ID ] );
+
+		// Check if the post exists
+		if (false === get_post_status($previous_post_ID)) {
 			return $messages;
 		}
+		
+		$current_permalink_url = get_permalink( $post_ID );
+		$current_preview_url = get_preview_post_link( $post_ID );
+		$previous_permalink_url = get_permalink( $previous_post_ID );
+		$previous_preview_url = get_preview_post_link( $previous_post_ID );
 
-		foreach ( $new_messages as $post_type => $post_type_messages ) {
-			
-			if( ! isset( $messages[ $post_type ] ) ) {
-				// If the $new_messages set messages for a post type not
-				// yet defined in the current $messages array, we initialise
-				// it with the 'post' post type messages.
-				$messages[ $post_type ] = $messages['post'];
-			}
+		foreach ($messages as $post_type => $post_messages) {
+			foreach ($post_messages as $code => $message) {
+				$message_changed = false;
+				$new_message = '';
 
-			$codes_to_message_keys = array(
-				1  => 'updated',
-				4  => 'updated-nolink',
-				6  => 'published',
-				8  => 'submitted',
-				9  => 'scheduled',
-				10 => 'draft-updated'
-			);
+				// We replaces URLs (normal and escaped versions)
+				switch ($code) {
+					case 1:
+					case 6:
+					case 9:
+						$new_message = str_replace($current_permalink_url, $previous_permalink_url, $message);
+						$new_message = str_replace(esc_url($current_permalink_url), esc_url($previous_permalink_url), $new_message);
+						$message_changed = true;
+						break;
 
-			// We update the default success messages
-			foreach ( $codes_to_message_keys as $code => $message_key ) {
-				if( isset( $post_type_messages[ $message_key ] ) ) {
-					$messages[ $post_type ][ $code ]  = $post_type_messages[ $message_key ];
+					case 8:
+					case 10:
+						$new_message = str_replace($current_preview_url, $previous_preview_url, $message);
+						$new_message = str_replace(esc_url($current_preview_url), esc_url($previous_preview_url), $new_message);
+						$message_changed = true;
+						break;
+				}
+
+				// We update the published date
+				if( 9 == $code ) {
+					$previous_post = get_post( $previous_post_ID );
+					$current_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $current_post->post_date ) );
+					$previous_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $previous_post->post_date ) );
+
+					$new_message = str_replace($current_date, $previous_date, $message);
+					$message_changed = true;
+				}
+
+				if( $message_changed ) {
+					$messages[$post_type][$code] = $new_message;
 				}
 			}
 		}
-
-		return $messages;
-	}
-
-
-	/**
-	 * Returns modified version of successful update messages shown
-	 * on the post edit page.
-	 *
-	 * After a successful redirect, the id of the post that was being
-	 * modified is passed in the URL. We thus update all the messages
-	 * that contain a link to the modified post.
-	 *
-	 * The returned array is in the following format (where <post_type> is
-	 * a string of a post type, like 'page') :
-	 * array(
-	 *   <post_type> => array(
-	 *     'updated' => <message>,
-	 *     'updated-nolink' => <message>,
-	 *     'published' => <message>,
-	 *     'scheduled' => <message>,
-	 *     'draft-updated' => <message>,
-	 *   ),
-	 *
-	 *   <other post_type> => array( ... ),
-	 *
-	 *   ...
-	 * )
-	 *
-	 * @see            Wordpress' edit-form-advanced.php:79 for usage
-	 * @param  string  $post_ID Id of the post that was modified
-	 * @return array   Messages per post type
-	 */
-	static protected function get_post_updated_messages( $post_ID ) {
-		$post = get_post( $post_ID );
-
-		if( ! $post )
-			return null;
-
-		$post_ID = $post->ID;
-		$post_url = get_permalink( $post_ID );
-		$post_preview_url = add_query_arg( 'preview', 'true', $post_url );
-
-		$messages = array();
-
-		$messages['post'] = array(
-			'updated' => sprintf( __('Post updated. <a href="%s">View post</a>'), esc_url( $post_url ) ),
-			'updated-nolink' => __('Post updated.'),
-			'published' => sprintf( __('Post published. <a href="%s">View post</a>'), esc_url( $post_url ) ),
-			'submitted' => sprintf( __('Post submitted. <a target="_blank" href="%s">Preview post</a>'), esc_url( $post_preview_url ) ),
-			'scheduled' => sprintf(
-				__('Post scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview post</a>'),
-				date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ),
-				esc_url( $post_preview_url ) ),
-			'draft-updated' => sprintf( __('Post draft updated. <a target="_blank" href="%s">Preview post</a>'), esc_url( $post_preview_url ) ),
-		);
-
-		$messages['page'] = array(
-			'updated' => sprintf( __('Page updated. <a href="%s">View page</a>'), esc_url( $post_url ) ),
-			'updated-nolink' => __('Page updated.'),
-			'published' => sprintf( __('Page published. <a href="%s">View page</a>'), esc_url( $post_url ) ),
-			'submitted' => sprintf( __('Page submitted. <a target="_blank" href="%s">Preview page</a>'), esc_url( $post_preview_url ) ),
-			'scheduled' => sprintf(
-				__('Page scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview page</a>'),
-				date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ),
-				esc_url( $post_preview_url ) ),
-			'draft-updated' => sprintf( __('Page draft updated. <a target="_blank" href="%s">Preview page</a>'), esc_url( $post_preview_url ) ),
-		);
 
 		return $messages;
 	}
