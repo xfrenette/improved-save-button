@@ -86,9 +86,12 @@ class LB_Save_And_Then {
 		LB_Save_And_Then_Messages::setup();
 		LB_Save_And_Then_Actions::setup();
 
-		// Priority 1, because the settings page is also on admin_init
-		// and uses translations
-		add_action( 'admin_init', array( get_called_class(), 'load_languages' ), 1 );
+		if( self::requires_language_loading() ) {
+			// Priority 1, because the settings page is also on
+			// admin_init and uses translations
+			add_action( 'admin_init', array( get_called_class(), 'load_languages' ), 1 );
+		}
+
 		add_action( 'lbsat_load_actions', array( get_called_class(), 'load_default_actions' ) );
 	}
 
@@ -142,6 +145,28 @@ class LB_Save_And_Then {
 	 */
 	static function get_main_file_path() {
 		return __FILE__;
+	}
+
+	/**
+	 * Returns true if this Wordpress version requires loading
+	 * of language files. It is not required since version 4.6
+	 *
+	 * @return boolean
+	 */
+	static function requires_language_loading() {
+		global $wp_version;
+
+		if( ! isset( $wp_version ) ) {
+			return true;
+		}
+
+		list( $version ) = explode( '-', $wp_version );
+
+		if( version_compare( $version, '4.6', '>=') ) {
+			return false;
+		}
+
+		return true;
 	}
 
 } // end class
