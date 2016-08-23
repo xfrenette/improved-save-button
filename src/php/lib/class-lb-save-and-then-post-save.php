@@ -85,6 +85,12 @@ class LB_Save_And_Then_Post_Save {
 		// We ask the Action where to redirect the user
 		$new_location = $sat_action->get_redirect_url( $location, $current_post );
 
+		// If an error was returned
+		if( is_wp_error( $new_location ) ) {
+			$error = $new_location;
+			wp_die($error);
+		}
+
 		if( $new_location ) {
 			return esc_url_raw( $new_location );
 		}
