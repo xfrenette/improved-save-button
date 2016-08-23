@@ -60,6 +60,7 @@ $actions_files_to_include = array(
 	'class-lb-save-and-then-action-view-popup.php',
 	'class-lb-save-and-then-action-next.php',
 	'class-lb-save-and-then-action-previous.php',
+	'class-lb-save-and-then-action-duplicate.php',
 );
 
 // Include all the actions php files
@@ -112,6 +113,7 @@ class LB_Save_And_Then {
 		$default_actions_classes = array(
 			'LB_Save_And_Then_Action_New',
 			'LB_Save_And_Then_Action_List',
+			'LB_Save_And_Then_Action_Duplicate',
 			'LB_Save_And_Then_Action_Next',
 			'LB_Save_And_Then_Action_Previous',
 			'LB_Save_And_Then_Action_View',
