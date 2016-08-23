@@ -37,6 +37,7 @@ class LB_Save_And_Then_Action_List extends LB_Save_And_Then_Action {
 	 * Constructor, adds a Wordpress hook to 'current_screen' action.
 	 */
 	function __construct() {
+		parent::__construct();
 		add_action('current_screen', array( $this, 'check_post_list_page' ) );
 	}
 
