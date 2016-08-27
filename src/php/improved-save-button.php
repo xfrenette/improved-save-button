@@ -113,9 +113,9 @@ class LB_Save_And_Then {
 	static function load_default_actions( $actions ) {
 		$default_actions_classes = array(
 			'LB_Save_And_Then_Action_New',
+			'LB_Save_And_Then_Action_Duplicate',
 			'LB_Save_And_Then_Action_List',
 			'LB_Save_And_Then_Action_Return',
-			'LB_Save_And_Then_Action_Duplicate',
 			'LB_Save_And_Then_Action_Next',
 			'LB_Save_And_Then_Action_Previous',
 			'LB_Save_And_Then_Action_View',
