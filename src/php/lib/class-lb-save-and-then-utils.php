@@ -149,6 +149,30 @@ class LB_Save_And_Then_Utils {
 	}
 
 	/**
+	 * Returns true if the URL is a post edit page. If the
+	 * $post_id is supplied, checks if it is also the post
+	 * edit page of the specified post.
+	 *
+	 * @param string $url
+	 * @param string $post_id
+	 * @return boolean
+	 */
+	static function url_is_post_edit( $url, $post_id = null ) {
+		$url_parts = self::parse_url( $url );
+		$url_params = $url_parts['query'];
+		$post_edit_url_base = admin_url( 'post.php' );
+
+		if( strpos( $url, $post_edit_url_base ) !== false ) {
+			$action_is_good = isset( $url_params['action'] ) && $url_params['action'] == 'edit';
+			$post_is_good = is_null($post_id) || ( isset( $url_params['post'] ) && $url_params['post'] == $post_id );
+			
+			return $action_is_good && $post_is_good;
+		}
+
+		return false;
+	}
+
+	/**
 	 * from a url string, returns the address parts
 	 * and the query params as an associative array
 	 * @param  [type] $url [description]
@@ -157,7 +181,9 @@ class LB_Save_And_Then_Utils {
 	static function parse_url( $url ) {
 		$url_parts = parse_url( $url );
 		$query = array();
-		wp_parse_str( $url_parts['query'], $query );
+		if( isset( $url_parts['query'] ) ) {
+			wp_parse_str( $url_parts['query'], $query );
+		}
 		$url_parts['query'] = $query;
 		return $url_parts;
 	}

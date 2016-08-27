@@ -49,7 +49,7 @@ class LB_Save_And_Then_Post_Save {
 	 */
 	static function redirect_post_location( $location, $post_id ) {
 		/**
-		 * Set in Wordpress' post.php
+		 * Set in Wordpress' wp-admin/post.php
 		 * @var string
 		 */
 		global $action;
@@ -60,7 +60,7 @@ class LB_Save_And_Then_Post_Save {
 		}
 
 		/**
-		 * @see  Wordpress' post.php
+		 * @see  Wordpress' wp-admin/post.php
 		 */
 		if( ! isset( $action ) || $action != 'editpost' ) {
 			return $location;

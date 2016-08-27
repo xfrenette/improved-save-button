@@ -61,6 +61,7 @@ $actions_files_to_include = array(
 	'class-lb-save-and-then-action-next.php',
 	'class-lb-save-and-then-action-previous.php',
 	'class-lb-save-and-then-action-duplicate.php',
+	'class-lb-save-and-then-action-return.php',
 );
 
 // Include all the actions php files
@@ -113,6 +114,7 @@ class LB_Save_And_Then {
 		$default_actions_classes = array(
 			'LB_Save_And_Then_Action_New',
 			'LB_Save_And_Then_Action_List',
+			'LB_Save_And_Then_Action_Return',
 			'LB_Save_And_Then_Action_Duplicate',
 			'LB_Save_And_Then_Action_Next',
 			'LB_Save_And_Then_Action_Previous',
