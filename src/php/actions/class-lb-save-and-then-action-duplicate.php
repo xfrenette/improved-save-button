@@ -71,7 +71,7 @@ class LB_Save_And_Then_Action_Duplicate extends LB_Save_And_Then_Action {
 		$new_post = self::copy_post( $post );
 
 		if( is_wp_error( $new_post ) ) {
-			return $new_post_id;
+			return $new_post;
 		}
 
 		self::copy_thumbnail( $post, $new_post );
@@ -82,7 +82,7 @@ class LB_Save_And_Then_Action_Duplicate extends LB_Save_And_Then_Action {
 		$params = $url_parts['query'];
 
 		// Query params to add
-		$params['post'] = $new_post_id;
+		$params['post'] = $new_post->ID;
 		$params['action'] = 'edit';
 		$params[ LB_Save_And_Then_Messages::HTTP_PARAM_UPDATED_POST_ID ] = $post->ID;
 
