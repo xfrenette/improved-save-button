@@ -1,36 +1,34 @@
 === @@plugin.name ===
 Contributors: LabelBlanc
-Tags: publish, save, close, list, edit, editing, return to list, close post, posts list, update, save and new, save and return, save and list, save and next, next post, save and previous, save and view, previous post, admin, administration, editor, multisite, custom post type, page, post
+Tags: publish, save, close, list, edit, editing, return to list, close post, posts list, update, save and new, save and return, save and list, save and next, next post, save and previous, save and view, previous post, admin, administration, editor, multisite, custom post type, page, post, save and return, duplicate, save and duplicate
 Requires at least: 3.5.1
 Tested up to: 4.6
 Stable tag: @@plugin.version
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Adds a "save" button which then redirects you to the posts list, the next/previous post, the New Post form or the post page.
+Improve your productivity with this "2-in-1" save button! It saves the post and immediately takes you to your next action.
 
 == Description ==
 
-This plugin adds a new and improved "Save" button to the Post Edit screen that, in a single click, saves the current post and immediately redirects you to either:
+This plugin adds a new and improved "Save" button to the Post Edit screen that, in a single click, saves the current post and immediately takes you to your next action. The following actions are available:
 
-* The posts list (Save and List, a.k.a. "Save and Close"),
-* The New Post screen (Save and New),
-* The Post Edit screen of the previous or next post (Save and Previous/Next),
-* The post's page on the frontend (Save and View).
+* **Save and New**: in a single click, saves the current post and goes to New Post Screen.
+* **Save and Duplicate**: saves the post, duplicates it and goes to this new post's Edit Screen.
+* **Save and List** (a.k.a. Save and Close): saves the post and goes to the Posts List.
+* **Save and Return**: saves the post and returns you to the page where you were just before (no matter which page).
+* **Save and Next**: saves the post and goes to the next post's Edit Screen.
+* **Save and Previous**: saves the post and goes to the previous post's Edit Screen.
+* **Save and View** (same or new window): saves the post and goes to the post's frontend page. Can show the post in the same window or in a new one.
 
 This plugin saves you a lot of time when you have multiple posts, pages or custom posts to create or modify!
 
 Works with pages, posts and custom post types!
 
-Through the plugin's settings page, choose which actions are available and which one to use as the buttons' default action.
+Through the plugin's settings page, you can choose which actions to show and which one to use as the button's default action.
 
-Detail of the actions this new button allows:
-
-* **Save and List** (a.k.a. Save and Close): in a single click, saves the current post and goes back to the posts list.
-* **Save and New**: saves the current post and goes to the New Post screen.
-* **Save and Previous**: saves the current post and goes to the previous post's Edit screen.
-* **Save and Next**: saves the current post and goes to the next post's Edit screen.
-* **Save and View** (same or new window): saves the current post and shows the post's page on the frontend. Can show the post in the same window or in a new one.
+**Want to help translate?**
+This plugin now uses the Wordpress Translation Service for translations. [Please visit the plugin's page to submit your translation!](https://translate.wordpress.org/projects/wp-plugins/improved-save-button)
 
 == Installation ==
 
@@ -48,6 +46,14 @@ Visit 'Settings > @@plugin.name' to adjust the configuration to your needs.
 3. The settings page
 
 == Changelog ==
+
+= 1.2 =
+Release Date: August 27, 2016
+
+* New action: A "Save and Return" action was added! This action redirects you to the page where you were before (no matter the page).
+* New action: A "Save and Duplicate" action was added! This action duplicates the current post and redirects you to this new post's Edit Screen.
+* Languages: for translators, contexts were added to strings. Also, all translation files were removed from the plugin and moved to the plugin's project on [Wordpress Translation Service](https://translate.wordpress.org/projects/wp-plugins/improved-save-button).
+* Some text updates and minor improvements.
 
 = 1.1.1 =
 Release Date: June 25, 2016
