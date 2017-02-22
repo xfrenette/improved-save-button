@@ -16,7 +16,8 @@ module.exports = function(grunt) {
 	grunt.util._.extend( config, {
 		jshint: {
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: '.jshintrc',
+				reporterOutput: ''
 			},
 			all: [ 'Gruntfile.js' ].concat( jsFileList )
 		},

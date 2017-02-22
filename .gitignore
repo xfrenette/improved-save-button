@@ -3,3 +3,6 @@
 *.mo
 /dist
 /src/po/*.pot
+.vagrant
+wordpress
+.sass-cache
