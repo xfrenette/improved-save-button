@@ -2,7 +2,7 @@
 Contributors: LabelBlanc
 Tags: publish, save, close, list, edit, editing, return to list, close post, posts list, update, save and new, save and return, save and list, save and next, next post, save and previous, save and view, previous post, admin, administration, editor, multisite, custom post type, page, post, save and return, duplicate, save and duplicate
 Requires at least: 3.5.1
-Tested up to: 4.6
+Tested up to: 4.7.2
 Stable tag: @@plugin.version
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -46,6 +46,11 @@ Visit 'Settings > @@plugin.name' to adjust the configuration to your needs.
 3. The settings page
 
 == Changelog ==
+
+= 1.2.1 =
+Release Date: February 22, 2017
+
+* Bug fix: "Save and next/previous" actions were skipping posts when multiple posts had the exact same date (which happens when batch importing posts).
 
 = 1.2 =
 Release Date: August 27, 2016

@@ -11,12 +11,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,18 +33,18 @@ class LB_Save_And_Then_Utils {
 	 * Internal cache variable to hold the adjacents post
 	 * The keys are in the format [post-id]-[next|previous],
 	 * the values are the post object.
-	 * 
+	 *
 	 * @var array
 	 */
 	static protected $adjacent_post_cache = array();
 
 	/**
 	 * Returns the full URL to a file in this plugins folder.
-	 * 
+	 *
 	 * This is a wrapper around Wordpress's plugins_url() function
 	 * setup to automatically check in this plugin's folder. Takes a
 	 * relative file path relative to the plugin's root folder.
-	 * 
+	 *
 	 * @param  string $file The file path relative to the plugin's folder.
 	 * @return string       The full URL to the file
 	 */
@@ -79,7 +79,7 @@ class LB_Save_And_Then_Utils {
 	 * only posts with 'published' state. We needed to check any post that
 	 * would be shown on an administration post list page (so with
 	 * publication status of 'published', 'draft', 'future', ...)
-	 * 
+	 *
 	 * @param  WP_Post $post  The post
 	 * @param  string $dir    'next' or 'previous'. Specifies which post to return
 	 * @return (WP_Post|null) The adjacent post or null if no post is found
@@ -101,15 +101,25 @@ class LB_Save_And_Then_Utils {
 			if ( ! current_user_can( $post_type_object->cap->edit_others_posts ) ) {
 				$additionnal_where .= ' AND post_author = \'' . get_current_user_id() . '\'';
 			}
-			
+
+			// The next (previous) post is the first one with a post_date
+			// greater (smaller) than the current post's date OR with the
+			// exact same date, but with an ID greater (smaller) than the
+			// current post's ID.
 			$query = $wpdb->prepare("
 					SELECT p.ID FROM $wpdb->posts AS p
-					WHERE p.post_date $op %s AND p.post_type = %s
+					WHERE
+					p.post_type = %s
+					AND (
+						p.post_date $op %s
+						OR
+						(p.post_date = %s AND p.ID $op %s)
+					)
 					AND (p.post_status NOT IN ('" . implode( "','", $exclude_states ) . "'))
 					$additionnal_where
-					ORDER BY p.post_date $order LIMIT 1
+					ORDER BY p.post_date $order, p.ID $order LIMIT 1
 				",
-				 $post->post_date, $post->post_type
+				 $post->post_type, $post->post_date, $post->post_date, $post->ID
 			);
 			$found_post_id = $wpdb->get_var( $query );
 
@@ -125,7 +135,7 @@ class LB_Save_And_Then_Utils {
 
 	/**
 	 * Returns true if the $url is the listing page of $post_type.
-	 * 
+	 *
 	 * @param  string  $url       The url to check
 	 * @param  string  $post_type The post type. Defaults to 'post'
 	 * @return boolean
@@ -165,7 +175,7 @@ class LB_Save_And_Then_Utils {
 		if( strpos( $url, $post_edit_url_base ) !== false ) {
 			$action_is_good = isset( $url_params['action'] ) && $url_params['action'] == 'edit';
 			$post_is_good = is_null($post_id) || ( isset( $url_params['post'] ) && $url_params['post'] == $post_id );
-			
+
 			return $action_is_good && $post_is_good;
 		}
 

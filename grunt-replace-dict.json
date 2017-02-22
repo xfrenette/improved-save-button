@@ -1,9 +1,9 @@
 {
 	"plugin" : {
 		"name" : "Improved Save Button",
-		"version": "1.2"
+		"version": "1.2.1"
 	},
 	"copyright" : {
-		"year" : "2016"
+		"year" : "2017"
 	}
 }

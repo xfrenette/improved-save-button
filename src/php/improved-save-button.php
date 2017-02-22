@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: @@plugin.name
-Description: Adds a new "Save" button to the Post Edit screen that saves the post and immediately redirects to one of the common screens: the Posts List, the New Post screen, the previous or next post's Edit screen or the post's frontend page.
+Description: Adds a new "Save" button to the Post Edit screen that saves the post and immediately takes you to your next action: the previous page, the next/previous post, the posts list, the post's frontend, etc.
 Author: Label Blanc
 Version: @@plugin.version
 Author URI: http://www.labelblanc.ca
@@ -20,12 +20,12 @@ Text Domain: improved-save-button
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
